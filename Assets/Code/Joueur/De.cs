@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class De : MonoBehaviour
 {
+
+    public int lancer() {
+		return Random.Range(1,7);
+	}
+
+
     // Start is called before the first frame update
     void Start()
     {
