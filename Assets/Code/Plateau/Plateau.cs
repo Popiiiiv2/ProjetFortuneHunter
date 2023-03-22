@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Plateau : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Case[] tabCase;
+    private int TAILLE_MAX = 32;
+
+    public Case getCase(int numCase) {
+        return tabCase[numCase];
     }
 
-    // Update is called once per frame
-    void Update()
+    public Case caseDebutPartie() {
+		return tabCase[0];
+	}
+
+    public void setNumCase() {
+        for(int i = 0; i < TAILLE_MAX; i++){
+            tabCase[i].setNumCase(i);
+        }
+    }
+
+    public void getAllCases(){
+        for(int i = 0; i < TAILLE_MAX; i++){
+            Debug.Log(tabCase[i].getNumCase());
+        }
+    }
+
+    void Start()
     {
-        
+        setNumCase();
     }
 }
