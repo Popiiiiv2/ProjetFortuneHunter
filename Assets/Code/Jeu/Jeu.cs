@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class Jeu : MonoBehaviour
 {
-    private Joueur j;
+    public Plateau plateau;
+    public Joueur joueur;
     // Start is called before the first frame update
     void Start()
     {
-        Plateau p = new Plateau();
-        string jaune = "jaune";
-        De de = new De();
-        j = new Joueur(p, jaune, de);
-        /*do{
-            j.deplacement();
-            Debug.Log(j.getCase().toString());
-        } while(!j.partieFini());
-        Debug.Log("Partie fini");*/
+        plateau.setNumCase();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.E)){
-            j.deplacement();
-            Debug.Log(j.getCase().toString());
+        if(Input.GetKey(KeyCode.Space)){
+            joueur.deplacement();
             System.Threading.Thread.Sleep(100);
         }
     }
