@@ -2,25 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Case
+public class Case : MonoBehaviour
 {
 
-    private int numCase;
+    public Plateau plateau;
     private string libelle;
     private TypeCase type;
+    private int numCase;
     private const int JOUR_MAX = 31;
-    private GameObject casePlateau;
 
-    public Case(int numCase){
-        this.numCase = numCase;
-        string str = "Case"+numCase;
-        casePlateau = GameObject.Find(str);
-    }
 
     //recupère la case de départ du joueur et lance le dé
     //return la case d'arrivée
     public Case depart(Joueur joueur){
-        int lancerDe = joueur.lancer();
+        int lancerDe = Random.Range(1,7);
         int numCaseSuivante = numCase + lancerDe;
         return caseSuivante(joueur, numCaseSuivante);
     }
@@ -30,37 +25,24 @@ public class Case
         if(numCaseSuivante > JOUR_MAX) {
             numCaseSuivante = JOUR_MAX;
         }    
-        Plateau plateau = joueur.getPlateau();
-        Case caseDestination = plateau.getCase(numCaseSuivante);
-        for(int i = numCase; i < numCaseSuivante; i++){  
-		    caseDestination = plateau.getCase(i);
-            joueur.deplacerJoueur(caseDestination);
-        }  
-        caseDestination = plateau.getCase(numCaseSuivante);
-		return caseDestination;
+        StartCoroutine(deplacement(joueur, numCaseSuivante));
+        //caseDestination = plateau.getCase(numCaseSuivante);
+		return plateau.getCase(numCaseSuivante);
 	}
 
-    public string toString() {
-        return "Il s'agit de la Case n° "+numCase;
+    IEnumerator deplacement(Joueur joueur, int numCaseSuivante){
+        for(int i = numCase; i <= numCaseSuivante; i++){ 
+            joueur.deplacerJoueur(plateau.getCase(i));  
+            yield return new WaitForSeconds(0.5f);
+        } 
+        joueur.setEnDeplacement();           
+    }
+
+    public void setNumCase(int numCase){
+        this.numCase = numCase;
     }
 
     public int getNumCase(){
         return numCase;
-    }
-
-    public GameObject getGameObject(){
-        return this.casePlateau;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

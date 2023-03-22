@@ -2,36 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plateau
+public class Plateau : MonoBehaviour
 {
-
-    private Case[] cases;
-    private static int TAILLE = 32;
-
-
-    public Plateau() {
-        cases = new Case[TAILLE];
-        for(int i = 0; i < TAILLE; i++){
-            cases[i] = new Case(i);
-        }
-    }
+    public Case[] tabCase;
+    private int TAILLE_MAX = 32;
 
     public Case getCase(int numCase) {
-        return cases[numCase];
+        return tabCase[numCase];
     }
 
     public Case caseDebutPartie() {
-		return cases[0];
+		return tabCase[0];
 	}
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public void setNumCase() {
+        for(int i = 0; i < TAILLE_MAX; i++){
+            tabCase[i].setNumCase(i);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void getAllCases(){
+        for(int i = 0; i < TAILLE_MAX; i++){
+            Debug.Log(tabCase[i].getNumCase());
+        }
+    }
+
+    void Start()
     {
-        
+        setNumCase();
     }
 }
