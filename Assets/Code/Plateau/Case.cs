@@ -9,9 +9,12 @@ public class Case
     private string libelle;
     private TypeCase type;
     private const int JOUR_MAX = 31;
+    private GameObject casePlateau;
 
     public Case(int numCase){
         this.numCase = numCase;
+        string str = "Case"+numCase;
+        casePlateau = GameObject.Find(str);
     }
 
     //recupère la case de départ du joueur et lance le dé
@@ -26,9 +29,14 @@ public class Case
     private Case caseSuivante(Joueur joueur, int numCaseSuivante) {
         if(numCaseSuivante > JOUR_MAX) {
             numCaseSuivante = JOUR_MAX;
-        }
-		Plateau plateau = joueur.getPlateau();
-		Case caseDestination = plateau.getCase(numCaseSuivante);
+        }    
+        Plateau plateau = joueur.getPlateau();
+        Case caseDestination = plateau.getCase(numCaseSuivante);
+        for(int i = numCase; i < numCaseSuivante; i++){  
+		    caseDestination = plateau.getCase(i);
+            joueur.deplacerJoueur(caseDestination);
+        }  
+        caseDestination = plateau.getCase(numCaseSuivante);
 		return caseDestination;
 	}
 
@@ -38,6 +46,10 @@ public class Case
 
     public int getNumCase(){
         return numCase;
+    }
+
+    public GameObject getGameObject(){
+        return this.casePlateau;
     }
 
     // Start is called before the first frame update

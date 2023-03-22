@@ -12,16 +12,20 @@ public class Jeu : MonoBehaviour
         string jaune = "jaune";
         De de = new De();
         j = new Joueur(p, jaune, de);
-        do{
+        /*do{
             j.deplacement();
             Debug.Log(j.getCase().toString());
         } while(!j.partieFini());
-        Debug.Log("PArtie fini");
+        Debug.Log("Partie fini");*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKey(KeyCode.E)){
+            j.deplacement();
+            Debug.Log(j.getCase().toString());
+            System.Threading.Thread.Sleep(100);
+        }
     }
 }

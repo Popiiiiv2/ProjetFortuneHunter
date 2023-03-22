@@ -9,12 +9,14 @@ public class Joueur
 	private Plateau plateau;
 	private string couleur;
 	private De de;
+    private GameObject pionJoueur;
 
     public Joueur(Plateau plateau, string couleur, De de) {
         this.plateau = plateau;
         this.couleur = couleur;
         this.de = de;
         this.casePlateau = plateau.caseDebutPartie();
+        this.pionJoueur = GameObject.Find("Black Pawn");
     }
 
     public int lancer() {
@@ -25,6 +27,7 @@ public class Joueur
     public void deplacement(){
         Case NouvelleCasePlateau = casePlateau.depart(this);
         this.casePlateau = NouvelleCasePlateau;
+        deplacerJoueur(casePlateau);
     }
 
     public Plateau getPlateau() {
@@ -37,6 +40,10 @@ public class Joueur
 
     public bool partieFini(){
         return casePlateau.getNumCase() >= 31;
+    }
+
+    public void deplacerJoueur(Case caseDestination){
+        pionJoueur.transform.position = caseDestination.getGameObject().transform.position;
     }
 
     // Start is called before the first frame update
