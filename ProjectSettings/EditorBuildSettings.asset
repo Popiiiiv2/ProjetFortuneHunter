@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuPrincipal/DebutDeGame.unity
     guid: b9be3ba6fd4378f4bbc4703e7c380290
   - enabled: 1
+    path: Assets/Scenes/Gameplay/Plateau final.unity
+    guid: 7ae1a6ee237132649acf440522233efc
+  - enabled: 0
     path: Assets/Scenes/Gameplay/Plateau.unity
     guid: 74e0f564ecaa5ab4aa55d0bfdd7ab4bb
   m_configObjects: {}
