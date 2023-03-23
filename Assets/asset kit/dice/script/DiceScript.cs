@@ -6,6 +6,7 @@ public class DiceScript : MonoBehaviour {
 
 	static Rigidbody rb;
 	public static Vector3 diceVelocity;
+	public static int diceNumber;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +18,7 @@ public class DiceScript : MonoBehaviour {
 		diceVelocity = rb.velocity;
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			DiceNumberTextScript.diceNumber = 0;
+			diceNumber = 0;
 			float dirX = Random.Range (0, 500);
 			float dirY = Random.Range (0, 500);
 			float dirZ = Random.Range (0, 500);

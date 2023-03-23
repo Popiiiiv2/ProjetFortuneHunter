@@ -17,22 +17,22 @@ public class DiceCheckZoneScript : MonoBehaviour {
 		{
 			switch (col.gameObject.name) {
 			case "Side1":
-				DiceNumberTextScript.diceNumber = 6;
+				DiceScript.diceNumber = 6;
 				break;
 			case "Side2":
-				DiceNumberTextScript.diceNumber = 5;
+				DiceScript.diceNumber = 5;
 				break;
 			case "Side3":
-				DiceNumberTextScript.diceNumber = 4;
+				DiceScript.diceNumber = 4;
 				break;
 			case "Side4":
-				DiceNumberTextScript.diceNumber = 3;
+				DiceScript.diceNumber = 3;
 				break;
 			case "Side5":
-				DiceNumberTextScript.diceNumber = 2;
+				DiceScript.diceNumber = 2;
 				break;
 			case "Side6":
-				DiceNumberTextScript.diceNumber = 1;
+				DiceScript.diceNumber = 1;
 				break;
 			}
 		}
