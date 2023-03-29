@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Carte : MonoBehaviour
+namespace Carte 
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class Carte
     {
-        
-    }
+        public override string getDescription();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override string getTitre();
+
+        public override string getType();
+
+        public override string getFichier();
+
+        public override string getAction();
+
+        public override int getValeur();
+
+        public override int getId();
+    
+        public override int getVente();
+
     }
 }

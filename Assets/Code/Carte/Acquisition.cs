@@ -5,42 +5,42 @@ using UnityEngine;
 namespace Cartes
 {
     [System.Serializable]
-    public class Acquisition
+    public class Acquisition : Carte
     {
         public string description, titre, type, fichier;
         public int valeur, vente, id;
 
-        public string getDescription()
+        public override string getDescription()
         {
             return description;
         }
 
-        public string getTitre()
+        public override string getTitre()
         {
             return titre;
         }
 
-        public string getType()
+        public override string getType()
         {
             return type;
         }
 
-        public string getFichier()
+        public override string getFichier()
         {
             return fichier;
         }
 
-        public int getVente()
+        public override int getVente()
         {
             return vente;
         }
 
-        public int getValeur()
+        public override int getValeur()
         {
             return valeur;
         }
 
-        public int getId()
+        public override int getId()
         {
             return id;
         }
