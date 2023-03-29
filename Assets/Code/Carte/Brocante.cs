@@ -5,11 +5,8 @@ using UnityEngine;
 namespace Cartes
 {
     [System.Serializable]
-    public class Acquisition : Carte
+    public class Brocante : Carte
     {
-        public string description, titre, type, fichier;
-        public int valeur, vente, id;
-
         public override string getDescription()
         {
             return description;
@@ -30,7 +27,7 @@ namespace Cartes
             return fichier;
         }
 
-        public override int getVente()
+        public int getVente()
         {
             return vente;
         }
@@ -43,6 +40,11 @@ namespace Cartes
         public override int getId()
         {
             return id;
+        }
+
+        public override string getAction()
+        {
+            return action;
         }
     }
 }

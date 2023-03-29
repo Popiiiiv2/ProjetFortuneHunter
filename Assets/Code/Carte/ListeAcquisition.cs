@@ -8,35 +8,42 @@ namespace Cartes
     [System.Serializable]
     public class ListeAcquisition
     {
-        public List<Acquisition> acquisition;
+        public List<Brocante> brocante;
 
-            public List<Acquisition> getListeAcquisition() {
-            return acquisition;
+        public List<Brocante> getListeAcquisition()
+        {
+            return brocante;
         }
 
-        public Acquisition tirerRandomAcquisition() {
-            int random = Random.Range(0,getListeAcquisition().Count);
-            Acquisition carte;
+        public Brocante tirerRandomAcquisition()
+        {
+            int random = Random.Range(0, getListeAcquisition().Count);
+            Brocante carte;
             carte = getListeAcquisition()[random];
             return carte;
         }
-        public bool estVide() {
+        public bool estVide()
+        {
             return getListeAcquisition().Count == 0;
         }
-        
-        public void remplirPaquetAcquisition() {
+
+        public void remplirPaquetAcquisition()
+        {
             string assetsPath = Application.dataPath;
             string jsonFilePath = assetsPath + "\\code\\jsonDonnee\\acquisition.json";
             string jsonAcq = File.ReadAllText(jsonFilePath);
-            ListeAcquisition acquisitions =  JsonUtility.FromJson<ListeAcquisition>(jsonAcq);
-            for(int i=0;i<acquisitions.getListeAcquisition().Count;i++) {
-                acquisition.Add(acquisitions.getListeAcquisition()[i]);
+            ListeAcquisition acquisitions = JsonUtility.FromJson<ListeAcquisition>(jsonAcq);
+            for (int i = 0; i < acquisitions.getListeAcquisition().Count; i++)
+            {
+                brocante.Add(acquisitions.getListeAcquisition()[i]);
             }
 
         }
 
-        public void retirerElementPaquetEmail(ListeAcquisition acquisitions, int index) {
-            if (!acquisitions.estVide()) {
+        public void retirerElementPaquetEmail(ListeAcquisition acquisitions, int index)
+        {
+            if (!acquisitions.estVide())
+            {
                 acquisitions.getListeAcquisition().RemoveAt(index);
             }
         }

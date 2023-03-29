@@ -7,8 +7,6 @@ namespace Cartes
     [System.Serializable]
     public class Evenement : Carte
     {
-        public string description, titre, type, fichier, action;
-        public int valeur, id;
 
         public override string getDescription()
         {

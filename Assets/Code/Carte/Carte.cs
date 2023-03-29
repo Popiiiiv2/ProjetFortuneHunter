@@ -1,26 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Carte 
+namespace Cartes
 {
     public abstract class Carte
     {
-        public override string getDescription();
+        public string description, titre, type, fichier, action;
+        public int valeur, vente, id;
+        public abstract string getDescription();
 
-        public override string getTitre();
+        public abstract string getTitre();
 
-        public override string getType();
+        public abstract string getType();
 
-        public override string getFichier();
+        public abstract string getFichier();
 
-        public override string getAction();
+        public abstract string getAction();
 
-        public override int getValeur();
+        public abstract int getValeur();
 
-        public override int getId();
-    
-        public override int getVente();
+        public abstract int getId();
 
     }
 }
