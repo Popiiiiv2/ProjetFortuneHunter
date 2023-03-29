@@ -15,6 +15,7 @@ public class Joueur : MonoBehaviour
         if(!enDeplacement) {
             enDeplacement = true;
             casePlateau = casePlateau.depart(this);
+            print("Il tombe sur la Case "+casePlateau.getTypeCase());
         }       
     }
 
