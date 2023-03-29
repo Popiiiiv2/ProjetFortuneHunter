@@ -7,37 +7,37 @@ namespace Cartes
     [System.Serializable]
     public class Email : Carte
     {
-        public string getDescription()
+        public override string getDescription()
         {
             return description;
         }
 
-        public string getTitre()
+        public override string getTitre()
         {
             return titre;
         }
 
-        public string getType()
+        public override string getType()
         {
             return type;
         }
 
-        public string getFichier()
+        public override string getFichier()
         {
             return fichier;
         }
 
-        public string getAction()
+        public override string getAction()
         {
             return action;
         }
 
-        public int getValeur()
+        public override int getValeur()
         {
             return valeur;
         }
 
-        public int getId()
+        public override int getId()
         {
             return id;
         }
