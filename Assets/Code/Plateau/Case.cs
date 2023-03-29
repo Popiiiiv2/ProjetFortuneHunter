@@ -10,12 +10,14 @@ public class Case : MonoBehaviour
     private TypeCase type;
     private int numCase;
     private const int JOUR_MAX = 31;
+    private const float TEMPS_ATTENTE = 0.25f;
 
 
     //recupère la case de départ du joueur et lance le dé
     //return la case d'arrivée
     public Case depart(Joueur joueur){
         int lancerDe = Random.Range(1,7);
+        print("Le joueur a fait "+lancerDe+", il avance donc de "+lancerDe+" cases");
         int numCaseSuivante = numCase + lancerDe;
         return caseSuivante(joueur, numCaseSuivante);
     }
@@ -33,7 +35,7 @@ public class Case : MonoBehaviour
     IEnumerator deplacement(Joueur joueur, int numCaseSuivante){
         for(int i = numCase; i <= numCaseSuivante; i++){ 
             joueur.deplacerJoueur(plateau.getCase(i));  
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
         } 
         joueur.setEnDeplacement();           
     }
