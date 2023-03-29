@@ -1,0 +1,31 @@
+{
+    "evenement": [
+        {
+            "id": "1",
+            "description": "Remportez la première place du tournoi de Beer Pong de Monteignet-Sur-L'Andelot",
+            "titre": "Champion !",
+            "type": "Event",
+            "valeur": "150",
+            "fichier": "",
+            "action": "Gain"
+        },
+        {
+            "id": "2",
+            "description": "Votre ballon casse les lunettes d'un enfant ",
+            "titre": "Pied carré",
+            "type": "Event",
+            "valeur": "250",
+            "fichier": "",
+            "action": "Perte"
+        },
+        {
+            "id": "3",
+            "description": "Offrez le repas à votre date",
+            "titre": "Repas de luxe",
+            "type": "Event",
+            "valeur": "100",
+            "fichier": "",
+            "action": "Perte"
+        }
+    ]
+}
