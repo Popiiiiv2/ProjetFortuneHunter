@@ -15,6 +15,7 @@ public class Joueur : MonoBehaviour
         if(!enDeplacement) {
             enDeplacement = true;
             casePlateau = casePlateau.depart(this);
+            print("Il tombe sur la Case "+casePlateau.getTypeCase());
         }       
     }
 
@@ -37,6 +38,10 @@ public class Joueur : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        caseDepart();
+    }
+
+    public void caseDepart(){
         this.casePlateau = plateau.caseDebutPartie();
     }
 }
