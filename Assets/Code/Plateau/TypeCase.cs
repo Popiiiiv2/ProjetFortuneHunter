@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TypeCase
+public class TypeCase
 {
-    public static readonly string BROCANTE = "";
-    public static readonly string PARI_SPORTIF = "";
-    public static readonly string EVENEMENT = "Evenement";
-    public static readonly string DIMANCHE = "";
+    public const string BROCANTE = "Brocante";
+    public const string PARI_SPORTIF = "Pari";
+    public const string EVENEMENT = "Evenement";
+    public const string DIMANCHE = "Dimanche";
+    public const string EMAIL = "Email";
 
 }

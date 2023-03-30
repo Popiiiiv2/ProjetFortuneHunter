@@ -11,18 +11,22 @@ public class Joueur : MonoBehaviour
     public De de;
 
     //permet au joueur de se déplacer (lance le dé et avance le pion)
-    public void deplacement(){
-        if(!enDeplacement) {
+    public void deplacement()
+    {
+        if (!enDeplacement)
+        {
             enDeplacement = true;
             casePlateau = casePlateau.depart(this);
-        }       
+        }
     }
 
-    public void setEnDeplacement() {
+    public void setEnDeplacement()
+    {
         enDeplacement = false;
     }
 
-    public Case getCase(){
+    public Case getCase()
+    {
         return this.casePlateau;
     }
 
@@ -30,7 +34,8 @@ public class Joueur : MonoBehaviour
         de.lancer();
     }*/
 
-    public void deplacerJoueur(Case caseDestination){
+    public void deplacerJoueur(Case caseDestination)
+    {
         this.transform.position = caseDestination.transform.position;
     }
 

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Case : MonoBehaviour
 {
-
     public Plateau plateau;
     private string libelle;
     private string type;
     private int numCase;
     private const int JOUR_MAX = 31;
 
+    public Case(string type)
+    {
+        this.type = type;
+    }
 
     //recupère la case de départ du joueur et lance le dé
     //return la case d'arrivée
@@ -51,5 +54,10 @@ public class Case : MonoBehaviour
     public int getNumCase()
     {
         return numCase;
+    }
+
+    public string getType()
+    {
+        return type;
     }
 }
