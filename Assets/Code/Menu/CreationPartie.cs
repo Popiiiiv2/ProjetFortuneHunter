@@ -15,7 +15,5 @@ public class CreationPartie : MonoBehaviour
     //nombreMois = DdMois.GetComponentsInChildren<Dropdown>();
     //nombreMois.value
 
-   // nombreJoueur = DdJoueur.GetComponentsInChildren<Dropdown>();
-    //nombreJoueur.value
     }
 }
