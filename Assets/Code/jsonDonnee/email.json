@@ -1,0 +1,31 @@
+{
+    "email": [
+        {
+            "id": "1",
+            "description": "Votre grand mère vous offre un cadeau",
+            "action": "Gain",
+            "type": "Email",
+            "titre": "Un cadeau",
+            "valeur": "50",
+            "fichier": ""
+        },
+        {
+            "id": "2",
+            "description": "Excès de vitesse dans la ville de Saint-Étienne 80 au lieu de 50",
+            "action": "Perte",
+            "type": "Email",
+            "titre": "Trop pressé",
+            "valeur": "135",
+            "fichier": ""
+        },
+        {
+            "id": "3",
+            "description": "Vous ouvrez un email de fishing",
+            "action": "Perte",
+            "type": "Email",
+            "titre": "Fishing",
+            "valeur": "350",
+            "fichier": ""
+        }
+    ]
+}
