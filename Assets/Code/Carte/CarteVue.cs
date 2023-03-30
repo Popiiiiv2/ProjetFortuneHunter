@@ -32,7 +32,7 @@ namespace Cartes
                 case TypeCase.MAIL:
                     return getemail();
             }
-            return null;
+            return getemail();
         }
         public CarteControleur getEvenement()
         {
