@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Jeu : MonoBehaviour
 {
-    public Plateau plateau;
+    private Plateau plateau;
     public Joueur joueur;
     public static int NOMBRE_DE_MOIS = 4;
     private const float TEMPS_ATTENTE = 2f;
     // Start is called before the first frame update
     void Start()
     {
+        plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
         plateau.setNumCase();
         StartCoroutine(jouerPartie());
     }
