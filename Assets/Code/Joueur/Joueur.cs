@@ -43,7 +43,6 @@ public class Joueur : MonoBehaviour
         }
         casePlateau = plateau.getCase(numCaseFinale);
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
-        print(jeu.paquets);
         CarteControleur paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         print(paquet.tirerRandomCarte().description);
         tourFini = true;
