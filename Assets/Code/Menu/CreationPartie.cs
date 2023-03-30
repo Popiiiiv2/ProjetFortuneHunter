@@ -18,11 +18,9 @@ public class CreationPartie : MonoBehaviour
     void Update(){
     //Recuper la valeur de nombre de mois choisi par les joueurs
     textMois=ddMois.captionText.text;
-    print(textMois);
 
     //Recuper la valeur de nombre de joueurs choisi par les joueurs
     textJoueur=ddJoueur.captionText.text;
-    print(textJoueur);
 
     switch (textJoueur)
     {
