@@ -11,6 +11,8 @@ public class Joueur : MonoBehaviour
     private CamSwitch camSwitch;
     private bool tourFini;
 
+    private int x;
+
     public void lancerDe()
     {
         tourFini = false;
@@ -29,7 +31,7 @@ public class Joueur : MonoBehaviour
         }
         StartCoroutine(deplacerJoueur(numCaseFinale));
     }
-
+    //tour du joueur
     IEnumerator deplacerJoueur(int numCaseFinale)
     {
         int numCasePlateauSuivante = casePlateau.getNumCase() + 1;
@@ -43,6 +45,7 @@ public class Joueur : MonoBehaviour
         print(numCaseFinale);
         casePlateau = plateau.getCase(numCaseFinale);
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
+
         tourFini = true;
     }
 
@@ -68,5 +71,12 @@ public class Joueur : MonoBehaviour
     {
         this.casePlateau = plateau.caseDebutPartie();
         this.transform.position = casePlateau.transform.position;
+    }
+
+    public void donnerPaquet(int a)
+    {
+        x = a;
+        x++;
+        print(x);
     }
 }

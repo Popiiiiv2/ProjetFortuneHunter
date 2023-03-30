@@ -14,17 +14,6 @@ public class Case : MonoBehaviour
     {
         this.type = type;
     }
-
-    IEnumerator deplacement(Joueur joueur, int numCaseSuivante)
-    {
-        for (int i = numCase; i <= numCaseSuivante; i++)
-        {
-            joueur.deplacerJoueur(plateau.getCase(i));
-            yield return new WaitForSeconds(0.5f);
-        }
-        joueur.setEnDeplacement();
-    }
-
     public void setNumCase(int numCase)
     {
         this.numCase = numCase;

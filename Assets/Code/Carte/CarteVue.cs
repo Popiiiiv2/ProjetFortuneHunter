@@ -15,7 +15,7 @@ namespace Cartes
         {
             evenement.nouveauPaquet(TypeCase.EVENEMENT);
             brocante.nouveauPaquet(TypeCase.BROCANTE);
-            email.nouveauPaquet(TypeCase.EMAIL);
+            email.nouveauPaquet(TypeCase.MAIL);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Cartes
             cheminDossier = Application.dataPath + "\\code\\jsonDonnee\\";
             nouveauPaquet(TypeCase.EVENEMENT);
             Debug.Log(tirerRandomCarte().getType());
-            nouveauPaquet(TypeCase.EMAIL);
+            nouveauPaquet(TypeCase.MAIL);
             Debug.Log(tirerRandomCarte().getType());
             nouveauPaquet(TypeCase.BROCANTE);
             Debug.Log(this.paquet.getList()[0].getType());
@@ -26,20 +26,20 @@ namespace Cartes
             Debug.Log(estVide());
         }
         //Génère un nouveau paquet en fonction du type passer en param
-        public void nouveauPaquet(string type)
+        public void nouveauPaquet(TypeCase type)
         {
             string jsonContenu;
             switch (type)
             {
-                case "Evenement":
+                case TypeCase.EVENEMENT:
                     jsonContenu = File.ReadAllText(cheminDossier + "evenement.json");
                     paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
                     break;
-                case "Brocante":
+                case TypeCase.BROCANTE:
                     jsonContenu = File.ReadAllText(cheminDossier + "brocante.json");
                     paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
                     break;
-                case "Email":
+                case TypeCase.MAIL:
                     jsonContenu = File.ReadAllText(cheminDossier + "email.json");
                     paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
                     break;
