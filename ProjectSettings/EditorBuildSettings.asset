@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay/Plateau.unity
     guid: 74e0f564ecaa5ab4aa55d0bfdd7ab4bb
   - enabled: 1
-    path: Assets/Scenes/Gameplay/Plateau final.unity
+    path: Assets/Scenes/Gameplay/Plateau.unity
     guid: 7ae1a6ee237132649acf440522233efc
   m_configObjects: {}
