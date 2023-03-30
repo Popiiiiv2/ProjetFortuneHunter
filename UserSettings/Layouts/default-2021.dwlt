@@ -141,9 +141,9 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   m_Children:
-  - {fileID: 7}
+  - {fileID: 4}
   - {fileID: 2}
-  - {fileID: 8}
+  - {fileID: 5}
   m_Position:
     serializedVersion: 2
     x: 0
