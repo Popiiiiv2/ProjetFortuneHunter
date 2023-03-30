@@ -35,7 +35,6 @@ public class Joueur : MonoBehaviour
             this.transform.position = caseSuivante.transform.position;
             yield return new WaitForSeconds(0.5f);
         }
-        print(numCaseFinale);
         casePlateau = plateau.getCase(numCaseFinale);
         print("Il tombe sur la case: "+casePlateau.getTypeCase());
         tourFini = true;
