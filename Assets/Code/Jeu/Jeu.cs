@@ -7,7 +7,7 @@ public class Jeu : MonoBehaviour
     public Plateau plateau;
     public Joueur joueur;
     public static int NOMBRE_DE_MOIS = 4;
-    private const float TEMPS_ATTENTE = 0.75f;
+    private const float TEMPS_ATTENTE = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +20,15 @@ public class Jeu : MonoBehaviour
             joueur.caseDepart();
             yield return new WaitForSeconds(TEMPS_ATTENTE);
             do{
-                joueur.deplacement();
-                yield return new WaitForSeconds(TEMPS_ATTENTE);
+                joueur.lancerDe();
+                do{
+                    yield return new WaitForSeconds(TEMPS_ATTENTE);
+                } while(!joueur.isTourFini());    
             }
             while (joueur.getCase().getNumCase() < 31);
             print("Tour "+i+" fini");
         }
         print("Partie Finie");
     }
+
 }
