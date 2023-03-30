@@ -5,12 +5,12 @@ using UnityEngine;
 public enum TypeCase
 {
     BROCANTE,
-    PARI_SPORTIF, 
-    EVENEMENT,  
-    MAIL, 
+    PARI_SPORTIF,
+    EVENEMENT,
+    MAIL,
     PAYE,
-    DIMANCHE,
-} 
+    DIMANCHE
+}
 
 public static class TypeCaseExtensions
 {
@@ -31,11 +31,12 @@ public static class TypeCaseExtensions
             case TypeCase.PAYE:
                 return Color.red;
             default:
-                return Color.white;;
-        }    
+                return Color.white; ;
+        }
     }
 
-    public static TypeCase getRandomTypeCase(int[] tab, TypeCase typeDernièreCase){
+    public static TypeCase getRandomTypeCase(int[] tab, TypeCase typeDernièreCase)
+    {
         int[] tabInt = caseDisponible(tab, typeDernièreCase);
         int x = NombreAleatoireNonContinu(tabInt);
         switch (x)
@@ -54,7 +55,7 @@ public static class TypeCaseExtensions
                 return TypeCase.MAIL;
             default:
                 return TypeCase.EVENEMENT;
-        } 
+        }
     }
 
     public static int NombreAleatoireNonContinu(int[] valeurs)
@@ -63,27 +64,35 @@ public static class TypeCaseExtensions
         return valeurs[index];
     }
 
-    public static int[] caseDisponible(int[] tab, TypeCase typeDernièreCase){
+    public static int[] caseDisponible(int[] tab, TypeCase typeDernièreCase)
+    {
         List<int> list = new List<int>();
-            if(tab[0] != 0 && typeDernièreCase != TypeCase.BROCANTE){
-                list.Add(1);
-            }
-            if(tab[1] != 0 && typeDernièreCase != TypeCase.PARI_SPORTIF){
-                list.Add(2);
-            }
-            if(tab[2] != 0 && typeDernièreCase != TypeCase.EVENEMENT){
-                list.Add(3);
-            }
-            if(tab[3] != 0 && typeDernièreCase != TypeCase.MAIL){
-                list.Add(4);
-            }
-            if(list.Count == 0) {
-                for(int i = 0; i < 4; i++){
-                    if(tab[i] != 0){
-                        list.Add(i+1);
-                    }
+        if (tab[0] != 0 && typeDernièreCase != TypeCase.BROCANTE)
+        {
+            list.Add(1);
+        }
+        if (tab[1] != 0 && typeDernièreCase != TypeCase.PARI_SPORTIF)
+        {
+            list.Add(2);
+        }
+        if (tab[2] != 0 && typeDernièreCase != TypeCase.EVENEMENT)
+        {
+            list.Add(3);
+        }
+        if (tab[3] != 0 && typeDernièreCase != TypeCase.MAIL)
+        {
+            list.Add(4);
+        }
+        if (list.Count == 0)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (tab[i] != 0)
+                {
+                    list.Add(i + 1);
                 }
             }
+        }
         return list.ToArray();
     }
 }
