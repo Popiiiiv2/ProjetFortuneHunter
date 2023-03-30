@@ -5,7 +5,7 @@ using Cartes;
 
 public class Jeu : MonoBehaviour
 {
-    public Plateau plateau;
+    private Plateau plateau;
     public Joueur joueur;
     public CarteVue paquets;
     public static int NOMBRE_DE_MOIS = 4;
@@ -13,6 +13,7 @@ public class Jeu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
         paquets = new CarteVue();
         plateau.setNumCase();
         StartCoroutine(jouerPartie());
