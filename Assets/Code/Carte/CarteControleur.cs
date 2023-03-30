@@ -5,26 +5,33 @@ using System.IO;
 
 namespace Cartes
 {
-    public class CarteControleur : MonoBehaviour
+    public class CarteControleur
     {
         private string cheminDossier;
         public CarteDataList paquet;
-        void Start()
+
+        public CarteControleur()
         {
+            paquet = new CarteDataList();
             cheminDossier = Application.dataPath + "\\code\\jsonDonnee\\";
-            nouveauPaquet(TypeCase.EVENEMENT);
-            Debug.Log(tirerRandomCarte().getType());
-            nouveauPaquet(TypeCase.MAIL);
-            Debug.Log(tirerRandomCarte().getType());
-            nouveauPaquet(TypeCase.BROCANTE);
-            Debug.Log(this.paquet.getList()[0].getType());
-            Debug.Log(tirerRandomCarte().getType());
-            Debug.Log(tirerRandomCarte().getType());
-            Debug.Log(tirerRandomCarte().getType());
-            Debug.Log(tirerRandomCarte().getType());
-            Debug.Log(tirerRandomCarte().getType());
-            Debug.Log(estVide());
         }
+
+        // void Start()
+        // {
+        //     cheminDossier = Application.dataPath + "\\code\\jsonDonnee\\";
+        //     nouveauPaquet(TypeCase.EVENEMENT);
+        //     Debug.Log(tirerRandomCarte().getType());
+        //     nouveauPaquet(TypeCase.MAIL);
+        //     Debug.Log(tirerRandomCarte().getType());
+        //     nouveauPaquet(TypeCase.BROCANTE);
+        //     Debug.Log(this.paquet.getList()[0].getType());
+        //     Debug.Log(tirerRandomCarte().getType());
+        //     Debug.Log(tirerRandomCarte().getType());
+        //     Debug.Log(tirerRandomCarte().getType());
+        //     Debug.Log(tirerRandomCarte().getType());
+        //     Debug.Log(tirerRandomCarte().getType());
+        //     Debug.Log(estVide());
+        // }
         //Génère un nouveau paquet en fonction du type passer en param
         public void nouveauPaquet(TypeCase type)
         {

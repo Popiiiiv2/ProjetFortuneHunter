@@ -8,12 +8,6 @@ public class Case : MonoBehaviour
     private TypeCase typeCase;
     private int numCase;
 
-    private string type;
-
-    public Case(string type)
-    {
-        this.type = type;
-    }
     public void setNumCase(int numCase)
     {
         this.numCase = numCase;

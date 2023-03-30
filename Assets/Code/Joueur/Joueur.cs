@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cartes;
 
 public class Joueur : MonoBehaviour
 {
-
+    public Jeu jeu;
     public Plateau plateau;
     private Case casePlateau;
     private De de;
     private CamSwitch camSwitch;
     private bool tourFini;
-
-    private int x;
 
     public void lancerDe()
     {
@@ -45,7 +44,9 @@ public class Joueur : MonoBehaviour
         print(numCaseFinale);
         casePlateau = plateau.getCase(numCaseFinale);
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
-
+        print(jeu.paquets);
+        CarteControleur paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
+        print(paquet.tirerRandomCarte().description);
         tourFini = true;
     }
 
@@ -71,12 +72,5 @@ public class Joueur : MonoBehaviour
     {
         this.casePlateau = plateau.caseDebutPartie();
         this.transform.position = casePlateau.transform.position;
-    }
-
-    public void donnerPaquet(int a)
-    {
-        x = a;
-        x++;
-        print(x);
     }
 }
