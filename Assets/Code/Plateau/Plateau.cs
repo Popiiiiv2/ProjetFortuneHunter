@@ -13,22 +13,28 @@ public class Plateau : MonoBehaviour
     private static int[] tab = {NOMBRE_MAX_BROCANTE, NOMBRE_MAX_PARI_SPORTIF, NOMBRE_MAX_EVENEMENT, NOMBRE_MAX_MAIL };
 
 
-    public Case getCase(int numCase) {
+    public Case getCase(int numCase)
+    {
         return tabCase[numCase];
     }
 
-    public Case caseDebutPartie() {
-		return tabCase[0];
-	}
+    public Case caseDebutPartie()
+    {
+        return tabCase[0];
+    }
 
-    public void setNumCase() {
-        for(int i = 0; i < TAILLE_MAX; i++){
+    public void setNumCase()
+    {
+        for (int i = 0; i < TAILLE_MAX; i++)
+        {
             tabCase[i].setNumCase(i);
         }
     }
 
-    public void getAllCases(){
-        for(int i = 0; i < TAILLE_MAX; i++){
+    public void getAllCases()
+    {
+        for (int i = 0; i < TAILLE_MAX; i++)
+        {
             Debug.Log(tabCase[i].getNumCase());
         }
     }
