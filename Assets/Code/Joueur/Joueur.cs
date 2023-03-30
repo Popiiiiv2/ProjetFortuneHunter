@@ -7,22 +7,43 @@ public class Joueur : MonoBehaviour
 
     public Plateau plateau;
     private Case casePlateau;
-    private bool enDeplacement = false;
-    public De de;
+    private De de;
+    private CamSwitch camSwitch;
+    private bool tourFini;
 
-    //permet au joueur de se déplacer (lance le dé et avance le pion)
-    public void deplacement()
+    public void lancerDe()
     {
-        if (!enDeplacement)
-        {
-            enDeplacement = true;
-            casePlateau = casePlateau.depart(this);
-        }
+        tourFini = false;
+        camSwitch.cameraDe();
+        de.lancerDe(this);
     }
 
-    public void setEnDeplacement()
+    public void avancer(int valeurDe)
     {
-        enDeplacement = false;
+        print(valeurDe);
+        camSwitch.cameraPlateau();
+        int numCaseFinale = valeurDe + casePlateau.getNumCase();
+        if (numCaseFinale > 31)
+        {
+            numCaseFinale = 31;
+        }
+        StartCoroutine(deplacerJoueur(numCaseFinale));
+    }
+
+    IEnumerator deplacerJoueur(int numCaseFinale)
+    {
+        int numCasePlateauSuivante = casePlateau.getNumCase() + 1;
+        yield return new WaitForSeconds(1);
+        for (int i = numCasePlateauSuivante; i <= numCaseFinale; i++)
+        {
+            Case caseSuivante = plateau.getCase(i);
+            this.transform.position = caseSuivante.transform.position;
+            yield return new WaitForSeconds(0.5f);
+        }
+        print(numCaseFinale);
+        casePlateau = plateau.getCase(numCaseFinale);
+        print("Il tombe sur la case: " + casePlateau.getTypeCase());
+        tourFini = true;
     }
 
     public Case getCase()
@@ -30,18 +51,22 @@ public class Joueur : MonoBehaviour
         return this.casePlateau;
     }
 
-    /*public int lancerDe(){
-        de.lancer();
-    }*/
-
-    public void deplacerJoueur(Case caseDestination)
+    public bool isTourFini()
     {
-        this.transform.position = caseDestination.transform.position;
+        return tourFini;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        caseDepart();
+        camSwitch = GameObject.Find("CamManager").GetComponent<CamSwitch>();
+        de = GameObject.Find("dice").GetComponent<De>();
+    }
+
+    public void caseDepart()
+    {
         this.casePlateau = plateau.caseDebutPartie();
+        this.transform.position = casePlateau.transform.position;
     }
 }

@@ -6,18 +6,29 @@ public class Jeu : MonoBehaviour
 {
     public Plateau plateau;
     public Joueur joueur;
+    public static int NOMBRE_DE_MOIS = 4;
+    private const float TEMPS_ATTENTE = 2f;
     // Start is called before the first frame update
     void Start()
     {
         plateau.setNumCase();
+        StartCoroutine(jouerPartie());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKey(KeyCode.Space)){
-            joueur.deplacement();
-            System.Threading.Thread.Sleep(100);
+    IEnumerator jouerPartie() {
+        for(int i = 1; i <= NOMBRE_DE_MOIS; i++){
+            joueur.caseDepart();
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
+            do{
+                joueur.lancerDe();
+                do{
+                    yield return new WaitForSeconds(TEMPS_ATTENTE);
+                } while(!joueur.isTourFini());    
+            }
+            while (joueur.getCase().getNumCase() < 31);
+            print("Tour "+i+" fini");
         }
+        print("Partie Finie");
     }
+
 }

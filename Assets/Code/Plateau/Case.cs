@@ -5,35 +5,14 @@ using UnityEngine;
 public class Case : MonoBehaviour
 {
     public Plateau plateau;
-    private string libelle;
-    private string type;
+    private TypeCase typeCase;
     private int numCase;
-    private const int JOUR_MAX = 31;
+
+    private string type;
 
     public Case(string type)
     {
         this.type = type;
-    }
-
-    //recupère la case de départ du joueur et lance le dé
-    //return la case d'arrivée
-    public Case depart(Joueur joueur)
-    {
-        int lancerDe = Random.Range(1, 7);
-        int numCaseSuivante = numCase + lancerDe;
-        return caseSuivante(joueur, numCaseSuivante);
-    }
-
-    //retourne la case d'arrivée du joueur après le lancer de dé
-    private Case caseSuivante(Joueur joueur, int numCaseSuivante)
-    {
-        if (numCaseSuivante > JOUR_MAX)
-        {
-            numCaseSuivante = JOUR_MAX;
-        }
-        StartCoroutine(deplacement(joueur, numCaseSuivante));
-        //caseDestination = plateau.getCase(numCaseSuivante);
-        return plateau.getCase(numCaseSuivante);
     }
 
     IEnumerator deplacement(Joueur joueur, int numCaseSuivante)
@@ -56,8 +35,13 @@ public class Case : MonoBehaviour
         return numCase;
     }
 
-    public string getType()
+    public void setTypeCase(TypeCase typeCase)
     {
-        return type;
+        this.typeCase = typeCase;
+    }
+
+    public TypeCase getTypeCase()
+    {
+        return typeCase;
     }
 }
