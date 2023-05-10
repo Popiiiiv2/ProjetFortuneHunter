@@ -6,7 +6,7 @@ using Cartes;
 public class Jeu : MonoBehaviour
 {
     private Plateau plateau;
-    private Joueur joueur;
+    private Joueur[] joueurs;
     public CarteVue paquets;
     private GlobalVariable globalVars;
     private int nbMois = 1;
@@ -14,11 +14,21 @@ public class Jeu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Pour la selection du nombre de mois
-        // globalVars = FindObjectOfType<GlobalVariable>();
-        // nbMois = globalVars.getNbMois();
+        globalVars = FindObjectOfType<GlobalVariable>();
+        nbMois = globalVars.getNbMois();
+        int nbJoueur = globalVars.getNbJoueur();
+        joueurs = new Joueur[nbJoueur];
+        for(int i = 0; i < 4; i++){
+            string str = "Joueur"+i;
+            GameObject j = GameObject.Find(str);
+            if(i < nbJoueur) {
+                joueurs[i] = j.GetComponent<Joueur>();
+                joueurs[i].caseDepart();
+            } else {
+                j.SetActive(false);
+            }        
+        }
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
-        joueur = GameObject.Find("Pions").GetComponent<Joueur>();
         paquets = new CarteVue();
         plateau.setNumCase();
         StartCoroutine(jouerPartie());
@@ -26,22 +36,33 @@ public class Jeu : MonoBehaviour
 
     IEnumerator jouerPartie()
     {
-        for (int i = 1; i <= nbMois; i++)
+        int tourDuJoueur = 0;
+        int moisMax = 1;
+        do
         {
-            joueur.caseDepart();
             yield return new WaitForSeconds(TEMPS_ATTENTE);
-            do
-            {
-                joueur.lancerDe();
-                do
-                {
-                    yield return new WaitForSeconds(TEMPS_ATTENTE);
-                } while (!joueur.isTourFini());
+            Joueur j = joueurs[tourDuJoueur];
+
+            j.lancerDe();
+            do{
+                yield return new WaitForSeconds(TEMPS_ATTENTE);
+            } while (!j.isTourFini());
+            if(j.getCase().getNumCase() == 31){
+                print("Tour " + j.getMoisMax() + " fini par le joueur " + tourDuJoueur+1);
+                j.caseDepart();
             }
-            while (joueur.getCase().getNumCase() < 31);
-            print("Tour " + i + " fini");
-        }
+            if(moisMax < j.getMoisMax()){
+                moisMax = j.getMoisMax();
+            }
+            tourDuJoueur++;
+            if(tourDuJoueur == joueurs.Length){
+                tourDuJoueur = 0;
+            }
+
+        } while (moisMax <= nbMois);
+
         print("Partie Finie");
     }
+
 
 }
