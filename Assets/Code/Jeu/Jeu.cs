@@ -7,7 +7,7 @@ public class Jeu : MonoBehaviour
 {
     private Plateau plateau;
     private Joueur[] joueurs;
-    public CarteVue paquets;
+    public PaquetsCartes paquets;
     private GlobalVariable globalVars;
     private int nbMois = 1;
     private const float TEMPS_ATTENTE = 2f;
@@ -29,7 +29,7 @@ public class Jeu : MonoBehaviour
             }        
         }
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
-        paquets = new CarteVue();
+        paquets = new PaquetsCartes();
         plateau.setNumCase();
         StartCoroutine(jouerPartie());
     }
