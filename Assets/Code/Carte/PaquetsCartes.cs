@@ -13,7 +13,7 @@ namespace Cartes
         public CarteControleur dimanche;
         public CarteControleur paye;
 
-        public CarteVue()
+        public PaquetsCartes()
         {
             evenement = new CarteControleur(TypeCase.EVENEMENT);
             brocante = new CarteControleur(TypeCase.BROCANTE);
