@@ -35,6 +35,7 @@ public class Joueur : MonoBehaviour
     //tour du joueur
     IEnumerator deplacerJoueur(int numCaseFinale)
     {
+        CarteData carteData = new CarteData();
         int numCasePlateauSuivante = casePlateau.getNumCase() + 1;
         yield return new WaitForSeconds(1);
         for (int i = numCasePlateauSuivante; i <= numCaseFinale; i++)
@@ -46,7 +47,8 @@ public class Joueur : MonoBehaviour
         casePlateau = plateau.getCase(numCaseFinale);
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
         CarteControleur paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
-        print(paquet.tirerRandomCarte().description);
+        carteData = paquet.tirerRandomCarte();
+        print(carteData.description);
         tourFini = true;
     }
 
