@@ -3,7 +3,7 @@
         {
             "id": "1",
             "description": "C'est votre jour de paye !",
-            "action": "Aucun",
+            "action": "Gain",
             "type": "Paye",
             "titre": "Jour de paye",
             "valeur": "250",

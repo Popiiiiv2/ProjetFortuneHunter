@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Cartes
 {
-    public class CarteVue
+    public class PaquetsCartes
     {
         public CarteControleur evenement;
         public CarteControleur brocante;

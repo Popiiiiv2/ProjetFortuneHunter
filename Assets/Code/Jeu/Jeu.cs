@@ -7,14 +7,14 @@ public class Jeu : MonoBehaviour
 {
     private Plateau plateau;
     public Joueur joueur;
-    public CarteVue paquets;
+    public PaquetsCartes paquets;
     public static int NOMBRE_DE_MOIS = 4;
     private const float TEMPS_ATTENTE = 2f;
     // Start is called before the first frame update
     void Start()
     {
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
-        paquets = new CarteVue();
+        paquets = new PaquetsCartes();
         plateau.setNumCase();
         StartCoroutine(jouerPartie());
     }
