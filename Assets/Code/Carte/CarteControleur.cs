@@ -53,6 +53,14 @@ namespace Cartes
                     jsonContenu = File.ReadAllText(cheminDossier + "email.json");
                     paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
                     break;
+                case TypeCase.DIMANCHE:
+                    jsonContenu = File.ReadAllText(cheminDossier + "dimanche.json");
+                    paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
+                    break;
+                case TypeCase.PAYE:
+                    jsonContenu = File.ReadAllText(cheminDossier + "paye.json");
+                    paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
+                    break;
                 default: break;
             }
         }
