@@ -13,12 +13,9 @@ namespace Cartes
 
         public CarteVue()
         {
-            evenement = new CarteControleur();
-            brocante = new CarteControleur();
-            mail = new CarteControleur();
-            evenement.nouveauPaquet(TypeCase.EVENEMENT);
-            brocante.nouveauPaquet(TypeCase.BROCANTE);
-            mail.nouveauPaquet(TypeCase.MAIL);
+            evenement = new CarteControleur(TypeCase.EVENEMENT);
+            brocante = new CarteControleur(TypeCase.BROCANTE);
+            mail = new CarteControleur(TypeCase.MAIL);
         }
 
         public CarteControleur getPaquet(TypeCase type)

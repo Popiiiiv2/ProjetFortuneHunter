@@ -42,6 +42,7 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         casePlateau = plateau.getCase(numCaseFinale);
+        print("Lancer du dé ");
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
         CarteControleur paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         print(paquet.tirerRandomCarte().description);

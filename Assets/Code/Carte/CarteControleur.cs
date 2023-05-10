@@ -8,12 +8,15 @@ namespace Cartes
     public class CarteControleur
     {
         private string cheminDossier;
+        private TypeCase type;
         public CarteDataList paquet;
 
-        public CarteControleur()
+        public CarteControleur(TypeCase type)
         {
             paquet = new CarteDataList();
             cheminDossier = Application.dataPath + "\\code\\jsonDonnee\\";
+            this.type = type;
+            nouveauPaquet();
         }
 
         // void Start()
@@ -33,7 +36,7 @@ namespace Cartes
         //     Debug.Log(estVide());
         // }
         //Génère un nouveau paquet en fonction du type passer en param
-        public void nouveauPaquet(TypeCase type)
+        public void nouveauPaquet()
         {
             string jsonContenu;
             switch (type)
@@ -57,10 +60,20 @@ namespace Cartes
         // Tire une carte dans le paquet de manière aléatoire
         public CarteData tirerRandomCarte()
         {
-            int random = Random.Range(0, paquet.getList().Count);
             CarteData carte;
-            carte = paquet.getList()[random];
-            retirerCartePaquet(random);
+            Debug.Log("Est non vide : " + !estVide());
+            Debug.Log("Nombre de carte dans le paquet" + paquet.getList().Count);
+            if(!estVide()){
+                int random = Random.Range(0, paquet.getList().Count);
+                Debug.Log("Valeur du random : " + random);
+                retirerCartePaquet(random);
+                carte = paquet.getList()[random];
+            }else{
+                nouveauPaquet();
+                int random = Random.Range(0, paquet.getList().Count);
+                retirerCartePaquet(random);
+                carte = paquet.getList()[random];
+            }
             return carte;
         }
 
@@ -72,6 +85,7 @@ namespace Cartes
                 paquet.getList().RemoveAt(index);
             }
         }
+
         // Renvoie vrai si un paquet est vide
         public bool estVide()
         {
