@@ -14,10 +14,11 @@ public class Jeu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        globalVars = FindObjectOfType<GlobalVariable>();
+        // Pour la selection du nombre de mois
+        // globalVars = FindObjectOfType<GlobalVariable>();
+        // nbMois = globalVars.getNbMois();
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
         joueur = GameObject.Find("Pions").GetComponent<Joueur>();
-        nbMois = globalVars.getNbMois();
         paquets = new CarteVue();
         plateau.setNumCase();
         StartCoroutine(jouerPartie());
