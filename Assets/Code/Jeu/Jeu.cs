@@ -9,7 +9,7 @@ public class Jeu : MonoBehaviour
     private Joueur joueur;
     public CarteVue paquets;
     private GlobalVariable globalVars;
-    private int nbMois;
+    private int nbMois = 1;
     private const float TEMPS_ATTENTE = 2f;
     // Start is called before the first frame update
     void Start()
