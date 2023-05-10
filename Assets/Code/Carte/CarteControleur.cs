@@ -61,19 +61,17 @@ namespace Cartes
         public CarteData tirerRandomCarte()
         {
             CarteData carte;
-            Debug.Log("Est non vide : " + !estVide());
-            Debug.Log("Nombre de carte dans le paquet" + paquet.getList().Count);
             if(!estVide()){
                 int random = Random.Range(0, paquet.getList().Count);
-                Debug.Log("Valeur du random : " + random);
-                retirerCartePaquet(random);
                 carte = paquet.getList()[random];
-            }else{
+                retirerCartePaquet(random);
+            }else {
                 nouveauPaquet();
                 int random = Random.Range(0, paquet.getList().Count);
-                retirerCartePaquet(random);
                 carte = paquet.getList()[random];
+                retirerCartePaquet(random);
             }
+            
             return carte;
         }
 
@@ -85,7 +83,6 @@ namespace Cartes
                 paquet.getList().RemoveAt(index);
             }
         }
-
         // Renvoie vrai si un paquet est vide
         public bool estVide()
         {
