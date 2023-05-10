@@ -11,6 +11,7 @@ public class Joueur : MonoBehaviour
     private De de;
     private CamSwitch camSwitch;
     private bool tourFini;
+    private int moisActuel;
 
     public void lancerDe()
     {
@@ -24,9 +25,10 @@ public class Joueur : MonoBehaviour
         print(valeurDe);
         camSwitch.cameraPlateau();
         int numCaseFinale = valeurDe + casePlateau.getNumCase();
-        if (numCaseFinale > 31)
+        if (numCaseFinale >= 31)
         {
             numCaseFinale = 31;
+            moisActuel++;
         }
         StartCoroutine(deplacerJoueur(numCaseFinale));
     }
@@ -58,12 +60,17 @@ public class Joueur : MonoBehaviour
         return tourFini;
     }
 
+    public int getMoisMax(){
+        return moisActuel;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         caseDepart();
         camSwitch = GameObject.Find("CamManager").GetComponent<CamSwitch>();
         de = GameObject.Find("dice").GetComponent<De>();
+        this.moisActuel = 1;
     }
 
     public void caseDepart()
