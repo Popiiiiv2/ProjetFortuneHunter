@@ -8,14 +8,17 @@ public class Joueur : MonoBehaviour
 {
     public Jeu jeu;
     public Plateau plateau;
+    public GameObject prefabObjetCarte;
+    public GameObject prefabObjetBrocante;
+    public GameObject prefabObjetJoueur;
     private Case casePlateau;
     private De de;
     private CamSwitch camSwitch;
-    public GameObject prefabObjet;
     private bool tourFini;
     private int moisActuel;
     private CarteControleur paquet;
     private HudJoueur hudJoueur;
+    private string prefabName;
 
     public void lancerDe()
     {
@@ -52,10 +55,10 @@ public class Joueur : MonoBehaviour
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
-        chargerPrefab();
+        chargerPrefab(carteData);
         afficherTexteCarte(carteData);
         print(carteData.description);
-        supprimerImageCarte();
+        supprimerPrefab();
         tourFini = true;
     }
 
@@ -88,12 +91,19 @@ public class Joueur : MonoBehaviour
         this.transform.position = casePlateau.transform.position;
     }
 
-    private void chargerPrefab(){
-        GameObject nouvelObjet = Instantiate(prefabObjet);
+    private void chargerPrefab(CarteData carteData){
+        print(carteData.getType());
+        if(carteData.getType() == "Broncante"){
+            GameObject nouvelObjet = Instantiate(prefabObjetBrocante);
+            prefabName = "PrefabCarteBrocante(Clone)";
+        } else {
+            GameObject nouvelObjet = Instantiate(prefabObjetCarte);
+            prefabName = "PrefabCarte(Clone)";
+        }
     }
 
-    private void supprimerImageCarte(){
-        GameObject objetASupprimer = GameObject.Find("Carte_Case");
+    private void supprimerPrefab(){
+        GameObject objetASupprimer = GameObject.Find(prefabName);
         if (objetASupprimer != null){
             Destroy(objetASupprimer,2);
         }else{
