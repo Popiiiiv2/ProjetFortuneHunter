@@ -14,6 +14,7 @@ public class Joueur : MonoBehaviour
     public GameObject prefabObjet;
     private bool tourFini;
     private int moisActuel;
+    private HudJoueur hudJoueur;
 
     public void lancerDe()
     {
@@ -123,5 +124,9 @@ public class Joueur : MonoBehaviour
             composantTexte.text = "";
             break;
         }
+    }
+
+    public void initialiserScoreJoueur(HudJoueur hudJoueur){
+        this.hudJoueur = hudJoueur;
     }
 }
