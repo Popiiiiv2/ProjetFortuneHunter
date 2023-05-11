@@ -55,6 +55,7 @@ public class Joueur : MonoBehaviour
         chargerPrefab();
         afficherTexteCarte(carteData);
         print(carteData.description);
+        hudJoueur.setScore(carteData);
         supprimerImageCarte();
         tourFini = true;
     }
