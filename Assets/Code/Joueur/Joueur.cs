@@ -14,6 +14,7 @@ public class Joueur : MonoBehaviour
     public GameObject prefabObjet;
     private bool tourFini;
     private int moisActuel;
+    private CarteControleur paquet;
 
     public void lancerDe()
     {
@@ -48,7 +49,7 @@ public class Joueur : MonoBehaviour
         }
         casePlateau = plateau.getCase(numCaseFinale);
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
-        CarteControleur paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
+        paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
         chargerPrefab();
         afficherTexteCarte(carteData);
