@@ -8,8 +8,12 @@ public class Action
 
     public void modifierArgent(ScoreJoueur score, CarteData carte) {
         switch (carte.getAction()) {
-            case "Perte" : 
-                score.setMontant(score.getMontant() - carte.getValeur());
+            case "Perte" :
+                if  (score.getMontant() < carte.getValeur()) {
+                    score.setMontant(0);
+                } else {
+                    score.setMontant(score.getMontant() - carte.getValeur());
+                }
                 break;
             case "Gain" : 
                 score.setMontant(score.getMontant() + carte.getValeur());
@@ -28,7 +32,8 @@ public class Action
         }
     }
 
-    public void transfertArgentCagnotte(ScoreJoueur donneur, Cagnotte cagnotte, int montant) {
+    public void transfertArgentCagnotte(ScoreJoueur donneur, Cagnotte cagnotte, CarteData carte) {
+        int montant = carte.getValeur();
         if (donneur.getMontant() >= montant) {
             donneur.setMontant(donneur.getMontant() - montant);
             cagnotte.setMontant(cagnotte.getMontant() + montant);
@@ -73,7 +78,7 @@ public class Action
 
     public void vente(ScoreJoueur vendeur) {
         if (vendeur.getInventaire().Count > 0) {
-            // Demander à l'utilisateur quelle carte il veut vendre
+            // Demander Ã  l'utilisateur quelle carte il veut vendre
             int index = 0;
             vendeur.setMontant(vendeur.getMontant() + vendeur.getInventaire()[index].getVente());
             vendeur.getInventaire().RemoveAt(index);
@@ -83,13 +88,21 @@ public class Action
 
     }
 
-    public void actionCarte(ScoreJoueur score, CarteData carte) {
+    public void actionCarte(ScoreJoueur score, Cagnotte cagnotte, CarteData carte) {
         switch (carte.getType()) {
             case "Email" :
-                modifierArgent(score, carte);
+                if (carte.getAction() == "Cagnotte") {
+                    transfertArgentCagnotte(score, cagnotte, carte);
+                } else {
+                    modifierArgent(score, carte);
+                }
                 break;
             case "Event" :
-                modifierArgent(score, carte);
+            if (carte.getAction() == "Cagnotte") {
+                    transfertArgentCagnotte(score, cagnotte, carte);
+                } else {
+                    modifierArgent(score, carte);
+                }
                 break;
             case "Brocante" :
                 achat(score, carte);
