@@ -11,7 +11,7 @@ public class Joueur : MonoBehaviour
     public GameObject prefabObjetBrocante;
     public GameObject prefabObjetJoueur;
     private Case casePlateau;
-    private De de;
+    private NewDice de;
     private CamSwitch camSwitch;
     private bool tourFini;
     private int moisActuel;
@@ -22,13 +22,11 @@ public class Joueur : MonoBehaviour
     public void lancerDe()
     {
         tourFini = false;
-        camSwitch.cameraDe();
         de.lancerDe(this);
     }
 
     public void avancer(int valeurDe)
     {
-        print(valeurDe);
         camSwitch.cameraPlateau();
         int numCaseFinale = valeurDe + casePlateau.getNumCase();
         if (numCaseFinale >= 31)
@@ -51,12 +49,10 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         casePlateau = plateau.getCase(numCaseFinale);
-        print("Il tombe sur la case: " + casePlateau.getTypeCase());
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
         chargerPrefab(carteData);
         afficherTexteCarte(carteData);
-        print(carteData.description);
         hudJoueur.setScore(carteData);
         supprimerPrefab();
         tourFini = true;
@@ -81,7 +77,7 @@ public class Joueur : MonoBehaviour
     {
         caseDepart();
         camSwitch = GameObject.Find("CamManager").GetComponent<CamSwitch>();
-        de = GameObject.Find("dice").GetComponent<De>();
+        de = GameObject.Find("Button").GetComponent<NewDice>();
         this.moisActuel = 1;
     }
 
@@ -92,7 +88,6 @@ public class Joueur : MonoBehaviour
     }
 
     private void chargerPrefab(CarteData carteData){
-        print(carteData.getType());
         if(carteData.getType() == "Brocante"){
             GameObject nouvelObjet = Instantiate(prefabObjetBrocante);
             prefabName = "PrefabCarteBrocante(Clone)";
