@@ -32,6 +32,8 @@ public class Jeu : MonoBehaviour
                 joueurs[i] = j.GetComponent<Joueur>();
                 joueurs[i].caseDepart();
 
+                str = "ScoreJoueur"+(i+1);
+                hud.initialiserScoreJoueur(str);
                 joueurs[i].initialiserScoreJoueur(hud);
             } else {
                 j.SetActive(false);
