@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cartes;
@@ -58,6 +57,7 @@ public class Joueur : MonoBehaviour
         chargerPrefab(carteData);
         afficherTexteCarte(carteData);
         print(carteData.description);
+        hudJoueur.setScore(carteData);
         supprimerPrefab();
         tourFini = true;
     }
