@@ -12,8 +12,8 @@ public class CreationPartie : MonoBehaviour
     private string nbJoueur;
 
  
-    public GameObject input3;
-    public GameObject input4;
+    //public GameObject input3;
+    //public GameObject input4;
 
     private GlobalVariable globalVars;
 
@@ -29,23 +29,23 @@ public class CreationPartie : MonoBehaviour
     switch (nbJoueur)
     {
         case "2" :
-        if (input3.activeInHierarchy == true || input4.activeInHierarchy == true)
+       /* if (input3.activeInHierarchy == true || input4.activeInHierarchy == true)
         {
         input3.SetActive(false);
         input4.SetActive(false);
-        }
+        }*/
         
         break;
         case "3" :
-        input3.SetActive(true);
-        if ( input4.activeInHierarchy == true )
-        {
-        input4.SetActive(false);
-        }
+       // input3.SetActive(true);
+       // if ( input4.activeInHierarchy == true )
+       // {
+        //input4.SetActive(false);
+//}
         break;
         case "4" :
-        input3.SetActive(true);
-        input4.SetActive(true);
+       // input3.SetActive(true);
+        //input4.SetActive(true);
         break;
     }
 
