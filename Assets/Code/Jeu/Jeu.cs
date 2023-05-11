@@ -16,18 +16,30 @@ public class Jeu : MonoBehaviour
     {
         globalVars = FindObjectOfType<GlobalVariable>();
         nbMois = globalVars.getNbMois();
+        // initialisation du nombre de joueurs
         int nbJoueur = globalVars.getNbJoueur();
         joueurs = new Joueur[nbJoueur];
         for(int i = 0; i < 4; i++){
+            // initialisation du joueur
             string str = "Joueur"+i;
             GameObject j = GameObject.Find(str);
+
+            // initialisation du score
+            str = "HUDJ"+(i+1);
+            GameObject gm = GameObject.Find(str);
+            HudJoueur hud = gm.GetComponent<HudJoueur>();
             if(i < nbJoueur) {
                 joueurs[i] = j.GetComponent<Joueur>();
                 joueurs[i].caseDepart();
+
+                joueurs[i].initialiserScoreJoueur(hud);
             } else {
                 j.SetActive(false);
-            }        
+                gm.SetActive(false);
+            }
+            
         }
+        // initialisation du plateau
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
         paquets = new PaquetsCartes();
         plateau.setNumCase();

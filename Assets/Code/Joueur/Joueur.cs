@@ -15,6 +15,7 @@ public class Joueur : MonoBehaviour
     private bool tourFini;
     private int moisActuel;
     private CarteControleur paquet;
+    private HudJoueur hudJoueur;
 
     public void lancerDe()
     {
@@ -124,5 +125,9 @@ public class Joueur : MonoBehaviour
             composantTexte.text = "";
             break;
         }
+    }
+
+    public void initialiserScoreJoueur(HudJoueur hudJoueur){
+        this.hudJoueur = hudJoueur;
     }
 }
