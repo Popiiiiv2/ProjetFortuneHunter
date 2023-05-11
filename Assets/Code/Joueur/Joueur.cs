@@ -8,9 +8,7 @@ public class Joueur : MonoBehaviour
 {
     public Jeu jeu;
     public Plateau plateau;
-    public GameObject prefabObjetCarte;
-    public GameObject prefabObjetBrocante;
-    public GameObject prefabObjetJoueur;
+    public AfficherCarte afficherCarte;
     private Case casePlateau;
     private De de;
     private CamSwitch camSwitch;
@@ -18,7 +16,6 @@ public class Joueur : MonoBehaviour
     private int moisActuel;
     private CarteControleur paquet;
     private HudJoueur hudJoueur;
-    private string prefabName;
 
     public void lancerDe()
     {
@@ -55,10 +52,10 @@ public class Joueur : MonoBehaviour
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
-        chargerPrefab(carteData);
-        afficherTexteCarte(carteData);
+        afficherCarte.chargerPrefab(carteData);
+        afficherCarte.afficherTexteCarte(carteData);
         print(carteData.description);
-        supprimerPrefab();
+        afficherCarte.supprimerPrefab();
         tourFini = true;
     }
 
@@ -72,7 +69,8 @@ public class Joueur : MonoBehaviour
         return tourFini;
     }
 
-    public int getMoisMax(){
+    public int getMoisMax()
+    {
         return moisActuel;
     }
 
@@ -91,53 +89,8 @@ public class Joueur : MonoBehaviour
         this.transform.position = casePlateau.transform.position;
     }
 
-    private void chargerPrefab(CarteData carteData){
-        print(carteData.getType());
-        if(carteData.getType() == "Brocante"){
-            GameObject nouvelObjet = Instantiate(prefabObjetBrocante);
-            prefabName = "PrefabCarteBrocante(Clone)";
-        } else {
-            GameObject nouvelObjet = Instantiate(prefabObjetCarte);
-            prefabName = "PrefabCarte(Clone)";
-        }
-    }
-
-    private void supprimerPrefab(){
-        GameObject objetASupprimer = GameObject.Find(prefabName);
-        if (objetASupprimer != null){
-            Destroy(objetASupprimer,2);
-        }else{
-            Debug.LogError("L'objet à supprimer n'a pas été trouvé dans la scène.");
-        }
-    }
-
-    public void afficherTexteCarte(CarteData carteData){
-        GameObject textObject = GameObject.Find("Carte_text");
-        Text composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = carteData.getDescription();
-
-        textObject = GameObject.Find("CarteTitle_text");
-        composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = carteData.getType();
-
-        textObject = GameObject.Find("CarteAction_text");
-        composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = "Gain : " + carteData.getValeur();
-
-        switch(carteData.getAction()){
-            case "Gain": 
-                composantTexte.text = "Gagner : " + carteData.getValeur();
-            break;
-            case "Perte": 
-                composantTexte.text = "Payer : " + carteData.getValeur();
-            break;
-            default : 
-            composantTexte.text = "";
-            break;
-        }
-    }
-
-    public void initialiserScoreJoueur(HudJoueur hudJoueur){
+    public void initialiserScoreJoueur(HudJoueur hudJoueur)
+    {
         this.hudJoueur = hudJoueur;
     }
 }
