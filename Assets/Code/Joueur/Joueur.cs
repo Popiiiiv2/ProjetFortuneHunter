@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cartes;
 
 public class Joueur : MonoBehaviour
@@ -10,9 +11,10 @@ public class Joueur : MonoBehaviour
     private Case casePlateau;
     private De de;
     private CamSwitch camSwitch;
+    public GameObject prefabObjet;
     private bool tourFini;
     private int moisActuel;
-    private HudJoueur hudJoueur;
+    //private HudJoueur hudJoueur;
 
     public void lancerDe()
     {
@@ -49,7 +51,10 @@ public class Joueur : MonoBehaviour
         print("Il tombe sur la case: " + casePlateau.getTypeCase());
         CarteControleur paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
+        chargerPrefab();
+        afficherTexteCarte(carteData);
         print(carteData.description);
+        supprimerImageCarte();
         tourFini = true;
     }
 
@@ -82,7 +87,46 @@ public class Joueur : MonoBehaviour
         this.transform.position = casePlateau.transform.position;
     }
 
-    public void initialiserScoreJoueur(HudJoueur hudJoueur){
-        this.hudJoueur = hudJoueur;
+    private void chargerPrefab(){
+        GameObject nouvelObjet = Instantiate(prefabObjet);
     }
+
+    private void supprimerImageCarte(){
+        GameObject objetASupprimer = GameObject.Find("Carte_Case");
+        if (objetASupprimer != null){
+            Destroy(objetASupprimer,2);
+        }else{
+            Debug.LogError("L'objet à supprimer n'a pas été trouvé dans la scène.");
+        }
+    }
+
+    public void afficherTexteCarte(CarteData carteData){
+        GameObject textObject = GameObject.Find("Carte_text");
+        Text composantTexte = textObject.GetComponent<Text>();
+        composantTexte.text = carteData.getDescription();
+
+        textObject = GameObject.Find("CarteTitle_text");
+        composantTexte = textObject.GetComponent<Text>();
+        composantTexte.text = carteData.getType();
+
+        textObject = GameObject.Find("CarteAction_text");
+        composantTexte = textObject.GetComponent<Text>();
+        composantTexte.text = "Gain : " + carteData.getValeur();
+
+        switch(carteData.getAction()){
+            case "Gain": 
+                composantTexte.text = "Gagner : " + carteData.getValeur();
+            break;
+            case "Perte": 
+                composantTexte.text = "Payer : " + carteData.getValeur();
+            break;
+            default : 
+            composantTexte.text = "";
+            break;
+        }
+    }
+
+    /*public void initialiserScoreJoueur(HudJoueur hudJoueur){
+        this.hudJoueur = hudJoueur;
+    }*/
 }
