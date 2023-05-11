@@ -2,47 +2,47 @@
   "data": [
     {
       "id": "1",
-      "description": "Vous recevez une mail de votre grand-mère. Il est écrit : \n 'Coucou mon poussin. Ta dernière visite m'a fait très plaisir. N'hésite pas à revenir quand tu veux ! Voici un petit cadeau pour toi' \n Vous recevez 50€",
+      "description": "Vous recevez une mail de votre grand-mère. Il est écrit : \n 'Coucou mon poussin. Ta dernière visite m'a fait très plaisir. N'hésite pas à revenir quand tu veux ! Voici un petit cadeau pour toi' \n Vous recevez 100€",
       "action": "Gain",
       "type": "Email",
       "titre": "Un cadeau",
-      "valeur": "50",
+      "valeur": "100",
       "fichier": ""
     },
     {
       "id": "2",
-      "description": "Vous recevez une contravention pour excès de vitesse dans la ville de Saint-Étienne. 80km/h au lieu de 50. \nVous versez 135€ dans la cagnotte",
+      "description": "Vous recevez une contravention pour excès de vitesse dans la ville de Saint-Étienne. 80km/h au lieu de 50. \nVous versez 70€ dans la cagnotte",
       "action": "Cagnotte",
       "type": "Email",
       "titre": "Trop pressé",
-      "valeur": "135",
+      "valeur": "70",
       "fichier": ""
     },
     {
       "id": "3",
-      "description": "Il est l'heure pour vous de payer vos factures. \nVous perdez 200€",
+      "description": "Il est l'heure pour vous de payer vos factures. \nVous perdez 80€",
       "action": "Perte",
       "type": "Email",
       "titre": "Facture",
-      "valeur": "200",
+      "valeur": "80",
       "fichier": ""
     },
     {
       "id": "4",
-      "description": "Vous ne faites pas attention et ouvrez un mail de phishing. \nVous perdez 350€",
+      "description": "Vous ne faites pas attention et ouvrez un mail de phishing. \nVous perdez 100€",
       "action": "Perte",
       "type": "Email",
       "titre": "Phishing",
-      "valeur": "350",
+      "valeur": "100",
       "fichier": ""
     },
     {
       "id": "5",
-      "description": "Il est temps de payer votre forfait téléphonique. \nVous perdez 100€",
+      "description": "Il est temps de payer votre forfait téléphonique. \nVous perdez 25€",
       "action": "Perte",
       "type": "Email",
       "titre": "Forfait mobile",
-      "valeur": "100",
+      "valeur": "25",
       "fichier": ""
     },
     {
@@ -56,20 +56,20 @@
     },
     {
       "id": "7",
-      "description": "Vous recevez un mail d'un prince nigérien qui vous demande 300€ afin de l'aider et vous promet 1000€ de retour sur investissement. \nVous perdez 300€",
+      "description": "Vous recevez un mail d'un prince nigérien qui vous demande 300€ afin de l'aider et vous promet 1000€ de retour sur investissement. \nVous perdez 200€",
       "action": "Perte",
       "type": "Email",
       "titre": "Scam",
-      "valeur": "300",
+      "valeur": "200",
       "fichier": ""
     },
     {
       "id": "8",
-      "description": "Vous vous faites avoir par des mails tendancieux envoyés par une femme souhaitant vous dévoiler ses atouts \nVous perdez 50€",
+      "description": "Vous vous faites avoir par des mails tendancieux envoyés par une femme souhaitant vous dévoiler ses atouts \nVous perdez 20€",
       "action": "Perte",
       "type": "Email",
       "titre": "Spam",
-      "valeur": "50",
+      "valeur": "20",
       "fichier": ""
     },
     {
@@ -114,7 +114,7 @@
       "action": "Perte",
       "type": "Email",
       "titre": "Faux concours",
-      "valeur": "200",
+      "valeur": "150",
       "fichier": ""
     },
     {
@@ -146,47 +146,47 @@
     },
     {
       "id": "17",
-      "description": "Vous recevez un mail vous proposant d'utiliser votre compte de formation CPF. \nVous perdez 100€",
+      "description": "Vous recevez un mail vous proposant d'utiliser votre compte de formation CPF. \nVous perdez 50€",
       "action": "Perte",
       "type": "Email",
       "titre": "CPF",
-      "valeur": "100",
+      "valeur": "50",
       "fichier": ""
     },
     {
       "id": "18",
-      "description": "Vous recevez un mail vous annonçant que vous devez payer des frais de douane suite à votre achat sur un site étranger. \nVous perdez 150€",
+      "description": "Vous recevez un mail vous annonçant que vous devez payer des frais de douane suite à votre achat sur un site étranger. \nVous perdez 30€",
       "action": "Perte",
       "type": "Email",
       "titre": "Douane",
-      "valeur": "150",
+      "valeur": "30",
       "fichier": ""
     },
     {
       "id": "19",
-      "description": "Votre banque vous demande d'entrer vos coordonnées bancaires afin de vérifier votre identité. \nVous cliquez sur un lien douteux. \nVous perdez 700€",
+      "description": "Votre banque vous demande d'entrer vos coordonnées bancaires afin de vérifier votre identité. \nVous cliquez sur un lien douteux. \nVous perdez 400€",
       "action": "Perte",
       "type": "Email",
-      "titre": "Douane",
-      "valeur": "700",
+      "titre": "Fausse banque",
+      "valeur": "400",
       "fichier": ""
     },
     {
       "id": "20",
-      "description": "Fe dexx vous annonce que votre colis est coincé et vous demande de payer.\n Vous payez pour un colis que vous n'avez jamais commandé. \nVous perdez 250€",
+      "description": "Fe dexx vous annonce que votre colis est coincé et vous demande de payer.\n Vous payez pour un colis que vous n'avez jamais commandé. \nVous perdez 85€",
       "action": "Perte",
       "type": "Email",
       "titre": "Faux colis",
-      "valeur": "250",
+      "valeur": "85",
       "fichier": ""
     },
     {
       "id": "21",
-      "description": "Le CROUS a fait une erreur lors du versement de vos bourses et vous rembourse la différence.\nVous gagnez 150€",
+      "description": "La CAF a fait une erreur lors du versement de vos bourses et vous rembourse la différence.\nVous gagnez 70€",
       "action": "Gain",
       "type": "Email",
-      "titre": "Erreur CROUS",
-      "valeur": "150",
+      "titre": "Erreur CAF",
+      "valeur": "70",
       "fichier": ""
     },
     {
@@ -200,11 +200,11 @@
     },
     {
       "id": "23",
-      "description": "Voici venue l'heure de payer vos impôts...\nVous cotisez 100€",
+      "description": "Voici venue l'heure de payer vos impôts...\nVous cotisez 90€",
       "action": "Cagnotte",
       "type": "Email",
       "titre": "Impôts",
-      "valeur": "100",
+      "valeur": "90",
       "fichier": ""
     }
   ]
