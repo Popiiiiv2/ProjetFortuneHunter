@@ -8,12 +8,15 @@ namespace Cartes
     public class CarteControleur
     {
         private string cheminDossier;
+        private TypeCase type;
         public CarteDataList paquet;
 
-        public CarteControleur()
+        public CarteControleur(TypeCase type)
         {
             paquet = new CarteDataList();
             cheminDossier = Application.dataPath + "\\code\\jsonDonnee\\";
+            this.type = type;
+            nouveauPaquet();
         }
 
         // void Start()
@@ -33,7 +36,7 @@ namespace Cartes
         //     Debug.Log(estVide());
         // }
         //Génère un nouveau paquet en fonction du type passer en param
-        public void nouveauPaquet(TypeCase type)
+        public void nouveauPaquet()
         {
             string jsonContenu;
             switch (type)
@@ -50,6 +53,14 @@ namespace Cartes
                     jsonContenu = File.ReadAllText(cheminDossier + "email.json");
                     paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
                     break;
+                case TypeCase.DIMANCHE:
+                    jsonContenu = File.ReadAllText(cheminDossier + "dimanche.json");
+                    paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
+                    break;
+                case TypeCase.PAYE:
+                    jsonContenu = File.ReadAllText(cheminDossier + "paye.json");
+                    paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
+                    break;
                 default: break;
             }
         }
@@ -57,10 +68,18 @@ namespace Cartes
         // Tire une carte dans le paquet de manière aléatoire
         public CarteData tirerRandomCarte()
         {
-            int random = Random.Range(0, paquet.getList().Count);
             CarteData carte;
-            carte = paquet.getList()[random];
-            retirerCartePaquet(random);
+            if(!estVide()){
+                int random = Random.Range(0, paquet.getList().Count);
+                carte = paquet.getList()[random];
+                retirerCartePaquet(random);
+            }else {
+                nouveauPaquet();
+                int random = Random.Range(0, paquet.getList().Count);
+                carte = paquet.getList()[random];
+                retirerCartePaquet(random);
+            }
+            
             return carte;
         }
 
