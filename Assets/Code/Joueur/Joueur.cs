@@ -12,6 +12,7 @@ public class Joueur : MonoBehaviour
     private CamSwitch camSwitch;
     private bool tourFini;
     private int moisActuel;
+    private HudJoueur hudJoueur;
 
     public void lancerDe()
     {
@@ -79,5 +80,9 @@ public class Joueur : MonoBehaviour
     {
         this.casePlateau = plateau.caseDebutPartie();
         this.transform.position = casePlateau.transform.position;
+    }
+
+    public void initialiserScoreJoueur(HudJoueur hudJoueur){
+        this.hudJoueur = hudJoueur;
     }
 }

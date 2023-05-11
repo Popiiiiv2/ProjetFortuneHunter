@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cartes;
 
-public class Action : MonoBehaviour
+public class Action
 {
 
     public void modifierArgent(ScoreJoueur score, CarteData carte) {
@@ -56,6 +56,11 @@ public class Action : MonoBehaviour
         return ;
     }
 
+
+
+    public bool demandeAchat() {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
 */
     public void achat(ScoreJoueur acheteur, CarteData carte) {
         if (acheteur.getMontant() >= carte.getValeur()) {
@@ -74,6 +79,23 @@ public class Action : MonoBehaviour
             vendeur.getInventaire().RemoveAt(index);
         } else {
             Debug.Log("Ton inventaire est vide");
+        }
+
+    }
+
+    public void actionCarte(ScoreJoueur score, CarteData carte) {
+        switch (carte.getType()) {
+            case "Email" :
+                modifierArgent(score, carte);
+                break;
+            case "Event" :
+                modifierArgent(score, carte);
+                break;
+            case "Brocante" :
+                achat(score, carte);
+                break;
+            default : break;
+
         }
 
     }
