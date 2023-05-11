@@ -93,7 +93,7 @@ public class Joueur : MonoBehaviour
 
     private void chargerPrefab(CarteData carteData){
         print(carteData.getType());
-        if(carteData.getType() == "Broncante"){
+        if(carteData.getType() == "Brocante"){
             GameObject nouvelObjet = Instantiate(prefabObjetBrocante);
             prefabName = "PrefabCarteBrocante(Clone)";
         } else {
