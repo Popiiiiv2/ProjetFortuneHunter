@@ -67,7 +67,7 @@ public class Jeu : MonoBehaviour
                 yield return new WaitForSeconds(TEMPS_ATTENTE);
             } while (!j.isTourFini());
             if(j.getCase().getNumCase() == 31){
-                print("Tour " + j.getMoisMax() + " fini par le joueur " + tourDuJoueur+1);
+                print("Tour " + j.getMoisMax() + " fini par le joueur " + (tourDuJoueur+1));
                 j.caseDepart();
             }
             if(moisMax < j.getMoisMax()){

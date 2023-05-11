@@ -8,8 +8,12 @@ public class Action
 
     public void modifierArgent(ScoreJoueur score, CarteData carte) {
         switch (carte.getAction()) {
-            case "Perte" : 
-                score.setMontant(score.getMontant() - carte.getValeur());
+            case "Perte" :
+                if  (score.getMontant() < carte.getValeur()) {
+                    score.setMontant(0);
+                } else {
+                    score.setMontant(score.getMontant() - carte.getValeur());
+                }
                 break;
             case "Gain" : 
                 score.setMontant(score.getMontant() + carte.getValeur());

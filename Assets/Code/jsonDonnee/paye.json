@@ -1,13 +1,13 @@
 {
-    "data": [
-        {
-            "id": "1",
-            "description": "C'est votre jour de paye !",
-            "action": "Gain",
-            "type": "Paye",
-            "titre": "Jour de paye",
-            "valeur": "250",
-            "fichier": ""
-        }
-    ]
+  "data": [
+    {
+      "id": "1",
+      "description": "C'est votre jour de paye !",
+      "action": "Gain",
+      "type": "Paye",
+      "titre": "Jour de paye",
+      "valeur": "1500",
+      "fichier": ""
+    }
+  ]
 }
