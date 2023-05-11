@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cartes;
+using System;
 
 public class Jeu : MonoBehaviour
 {
@@ -10,15 +11,18 @@ public class Jeu : MonoBehaviour
     public PaquetsCartes paquets;
     private GlobalVariable globalVars;
     private int nbMois = 1;
+    private Cagnotte cagnotte;
     private const float TEMPS_ATTENTE = 2f;
     // Start is called before the first frame update
     void Start()
     {
+        //récupération du nombre de joueurs et de mois
         globalVars = FindObjectOfType<GlobalVariable>();
         nbMois = globalVars.getNbMois();
-        // initialisation du nombre de joueurs
         int nbJoueur = globalVars.getNbJoueur();
         joueurs = new Joueur[nbJoueur];
+
+        this.cagnotte = new Cagnotte();
         for(int i = 0; i < 4; i++){
             // initialisation du joueur
             string str = "Joueur"+i;
@@ -34,6 +38,7 @@ public class Jeu : MonoBehaviour
 
                 str = "ScoreJoueur"+(i+1);
                 hud.initialiserScoreJoueur(str);
+                hud.setJeu(this);
                 joueurs[i].initialiserScoreJoueur(hud);
             } else {
                 j.SetActive(false);
@@ -78,5 +83,8 @@ public class Jeu : MonoBehaviour
         print("Partie Finie");
     }
 
-
+    public Cagnotte getCagnotte()
+    {
+        return cagnotte;
+    }
 }
