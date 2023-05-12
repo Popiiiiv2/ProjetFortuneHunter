@@ -23,18 +23,13 @@ public class NewDice : MonoBehaviour
  
     }
 
-    public void lancerDe(Joueur j){
+    public void lancerDe(){
         valeurDe = 0;
         yourButton.interactable = true;
-        StartCoroutine(AttendrelancerDe(j));
     }
 
-
-    IEnumerator AttendrelancerDe(Joueur j){
-        while(valeurDe == 0) {
-            yield return new WaitForSeconds(1);
-        }
-        j.avancer(valeurDe);
+    public int getValeurDe(){
+        return valeurDe;
     }
 }
 

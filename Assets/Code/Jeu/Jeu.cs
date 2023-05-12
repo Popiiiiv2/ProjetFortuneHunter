@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cartes;
-using System;
 
 public class Jeu : MonoBehaviour
 {
@@ -11,75 +10,48 @@ public class Jeu : MonoBehaviour
     public PaquetsCartes paquets;
     private List<GameObject> hudASupprimer = new List<GameObject>();
     private GlobalVariable globalVars;
-    private int nbMois = 1;
+    private int nbMois;
     private Cagnotte cagnotte;
-    private const float TEMPS_ATTENTE = 2f;
+    private const float TEMPS_ATTENTE = 1f;
+    private const int NB_MAX_JOUEUR = 4;
+    private const int NB_JOUR_MAX = 31;
+
     // Start is called before the first frame update
     void Start()
     {
-        //récupération du nombre de joueurs et de mois
-        globalVars = FindObjectOfType<GlobalVariable>();
-        nbMois = globalVars.getNbMois();
-        int nbJoueur = globalVars.getNbJoueur();
-        joueurs = new Joueur[nbJoueur];
-
+        RecuperationDesVariables();
+        // Initialisation de la cagnotte
         this.cagnotte = new Cagnotte();
-        for(int i = 0; i < 4; i++){
-            // initialisation du joueur
-            string str = "Joueur"+i;
-            GameObject j = GameObject.Find(str);
-
-            // initialisation du score
-            str = "HUDJ"+(i+1);
-            GameObject gm = GameObject.Find(str);
-            HudJoueur hud = gm.GetComponent<HudJoueur>();
-            if(i < nbJoueur) {
-                joueurs[i] = j.GetComponent<Joueur>();
-                joueurs[i].caseDepart();
-
-                str = "ScoreJoueur"+(i+1);
-                hud.initialiserScoreJoueur(str);
-                hud.setJeu(this);
-                joueurs[i].initialiserScoreJoueur(hud);
-            } else {
-                j.SetActive(false);
-                hudASupprimer.Add(gm);
-            }
-            
-        }
-        // initialisation du plateau
-        plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
+        InitialisationDesJoueurs();
+        InitialisationDesHud();
+        CreationPlateau();
+        //initialisation du paquet
         paquets = new PaquetsCartes();
-        plateau.setNumCase();
+        //lancer la partie
         StartCoroutine(jouerPartie());
     }
 
+    //Jouer la partie
     IEnumerator jouerPartie()
     {
         int tourDuJoueur = 0;
-        int moisMax = 1;
+        int moisActuel = 1;
         do
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
             Joueur j = joueurs[tourDuJoueur];
             print("Tour du joueur: "+(tourDuJoueur+1));
-            j.lancerDe();
+            StartCoroutine(j.effectuerUnTour());
             do{
                 yield return new WaitForSeconds(TEMPS_ATTENTE);
             } while (!j.isTourFini());
-            if(j.getCase().getNumCase() == 31){
+            if(SurCasePaye(j)){
                 print("Tour " + j.getMoisMax() + " fini par le joueur " + (tourDuJoueur+1));
                 j.caseDepart();
             }
-            if(moisMax < j.getMoisMax()){
-                moisMax = j.getMoisMax();
-            }
-            tourDuJoueur++;
-            if(tourDuJoueur == joueurs.Length){
-                tourDuJoueur = 0;
-            }
-
-        } while (moisMax <= nbMois);
+            moisActuel = getMoisActuel(moisActuel, j);
+            tourDuJoueur = tourJoueurSuivant(tourDuJoueur);
+        } while (moisActuel <= nbMois);
 
         print("Partie Finie");
     }
@@ -94,4 +66,65 @@ public class Jeu : MonoBehaviour
             gm.SetActive(false);
         }
     }
+
+    // initialisation du plateau
+    public void CreationPlateau(){
+        plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
+        plateau.setNumCase();
+    }
+
+    //récupération du nombre de joueurs et de mois
+    public void RecuperationDesVariables(){          
+        globalVars = FindObjectOfType<GlobalVariable>();
+        nbMois = globalVars.getNbMois();
+        int nbJoueur = globalVars.getNbJoueur();
+        joueurs = new Joueur[nbJoueur];
+    }
+
+    // initialisation des joueurs
+    public void InitialisationDesJoueurs(){
+        for(int i = 0; i < NB_MAX_JOUEUR; i++){
+            string str = "Joueur"+i;
+            GameObject j = GameObject.Find(str);
+            if(i < joueurs.Length){
+                joueurs[i] = j.GetComponent<Joueur>();
+                joueurs[i].caseDepart();
+            } else {
+                j.SetActive(false);
+            }
+        }
+    }
+
+    // initialisation des Huds Joueurs
+    public void InitialisationDesHud(){
+        for(int i =0; i < NB_MAX_JOUEUR; i++){
+            string str = "HUDJ"+(i+1);
+            GameObject gm = GameObject.Find(str);
+            HudJoueur hud = gm.GetComponent<HudJoueur>();
+            if(i < joueurs.Length) {
+                str = "ScoreJoueur"+(i+1);
+                hud.initialiserScoreJoueur(str);
+                hud.setJeu(this);
+                joueurs[i].initialiserScoreJoueur(hud);
+            } else {
+                hudASupprimer.Add(gm);
+            }
+        }
+    }
+
+    // Verifie si le joueur est sur la case Paye
+    public bool SurCasePaye(Joueur j){
+        return j.getCase().getNumCase() == NB_JOUR_MAX;
+    }
+
+    // Renvoie le mois maximal qui est joué
+    public int getMoisActuel(int moisActuel, Joueur j){
+        return Mathf.Max(moisActuel, j.getMoisMax());
+    }
+
+    // Récupère le score du joueur
+    public int tourJoueurSuivant(int tourDuJoueur){
+        return (tourDuJoueur + 1) % joueurs.Length;
+    }
 }
+
