@@ -44,30 +44,45 @@ public class AfficherCarte : MonoBehaviour
         }
     }
 
-    public void afficherTexteCarte(CarteData carteData)
+    private void descriptionCarte(string description)
     {
         GameObject textObject = GameObject.Find("Carte_text");
         Text composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = carteData.getDescription();
+        composantTexte.text = description;
+    }
 
-        textObject = GameObject.Find("CarteTitle_text");
-        composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = carteData.getType();
+    private void titleCarte(string title)
+    {
+        GameObject textObject = GameObject.Find("CarteTitle_text");
+        Text composantTexte = textObject.GetComponent<Text>();
+        composantTexte.text = title;
+    }
 
-        textObject = GameObject.Find("CarteAction_text");
-        composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = "Gain : " + carteData.getValeur();
+    private void actionCarte(string action)
+    {
+        GameObject textObject = GameObject.Find("CarteAction_text");
+        Text composantTexte = textObject.GetComponent<Text>();
+        composantTexte.text = "Gain : " + action;
+    }
 
+    public void afficherTexteCarte(CarteData carteData)
+    {
+        string text;
+        titleCarte(carteData.getType());
+        descriptionCarte(carteData.getDescription());
         switch (carteData.getAction())
         {
             case "Gain":
-                composantTexte.text = "Gagner : " + carteData.getValeur();
+                text = "Gagner : " + carteData.getValeur();
+                actionCarte(text);
                 break;
             case "Perte":
-                composantTexte.text = "Payer : " + carteData.getValeur();
+                text = "Payer : " + carteData.getValeur();
+                actionCarte(text);
                 break;
             default:
-                composantTexte.text = "";
+                text = "";
+                actionCarte(text);
                 break;
         }
     }

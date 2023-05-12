@@ -23,28 +23,32 @@ public class Jeu : MonoBehaviour
         joueurs = new Joueur[nbJoueur];
 
         this.cagnotte = new Cagnotte();
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++)
+        {
             // initialisation du joueur
-            string str = "Joueur"+i;
+            string str = "Joueur" + i;
             GameObject j = GameObject.Find(str);
 
             // initialisation du score
-            str = "HUDJ"+(i+1);
+            str = "HUDJ" + (i + 1);
             GameObject gm = GameObject.Find(str);
             HudJoueur hud = gm.GetComponent<HudJoueur>();
-            if(i < nbJoueur) {
+            if (i < nbJoueur)
+            {
                 joueurs[i] = j.GetComponent<Joueur>();
                 joueurs[i].caseDepart();
 
-                str = "ScoreJoueur"+(i+1);
+                str = "ScoreJoueur" + (i + 1);
                 hud.initialiserScoreJoueur(str);
                 hud.setJeu(this);
                 joueurs[i].initialiserScoreJoueur(hud);
-            } else {
+            }
+            else
+            {
                 j.SetActive(false);
                 gm.SetActive(false);
             }
-            
+
         }
         // initialisation du plateau
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
@@ -63,18 +67,22 @@ public class Jeu : MonoBehaviour
             Joueur j = joueurs[tourDuJoueur];
 
             j.lancerDe();
-            do{
+            do
+            {
                 yield return new WaitForSeconds(TEMPS_ATTENTE);
             } while (!j.isTourFini());
-            if(j.getCase().getNumCase() == 31){
-                print("Tour " + j.getMoisMax() + " fini par le joueur " + (tourDuJoueur+1));
+            if (j.getCase().getNumCase() == 31)
+            {
+                print("Tour " + j.getMoisMax() + " fini par le joueur " + (tourDuJoueur + 1));
                 j.caseDepart();
             }
-            if(moisMax < j.getMoisMax()){
+            if (moisMax < j.getMoisMax())
+            {
                 moisMax = j.getMoisMax();
             }
             tourDuJoueur++;
-            if(tourDuJoueur == joueurs.Length){
+            if (tourDuJoueur == joueurs.Length)
+            {
                 tourDuJoueur = 0;
             }
 
