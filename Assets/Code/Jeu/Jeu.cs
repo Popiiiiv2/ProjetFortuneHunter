@@ -9,6 +9,7 @@ public class Jeu : MonoBehaviour
     private Plateau plateau;
     private Joueur[] joueurs;
     public PaquetsCartes paquets;
+    private List<GameObject> hudASupprimer = new List<GameObject>();
     private GlobalVariable globalVars;
     private int nbMois = 1;
     private Cagnotte cagnotte;
@@ -46,7 +47,7 @@ public class Jeu : MonoBehaviour
             else
             {
                 j.SetActive(false);
-                gm.SetActive(false);
+                hudASupprimer.Add(gm);
             }
 
         }
@@ -65,7 +66,7 @@ public class Jeu : MonoBehaviour
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
             Joueur j = joueurs[tourDuJoueur];
-
+            print("Tour du joueur: "+(tourDuJoueur+1));
             j.lancerDe();
             do
             {
@@ -94,5 +95,11 @@ public class Jeu : MonoBehaviour
     public Cagnotte getCagnotte()
     {
         return cagnotte;
+    }
+
+    void Update(){
+        foreach(GameObject gm in hudASupprimer){
+            gm.SetActive(false);
+        }
     }
 }

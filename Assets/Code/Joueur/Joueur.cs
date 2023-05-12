@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cartes;
@@ -10,7 +9,7 @@ public class Joueur : MonoBehaviour
     public Plateau plateau;
     public AfficherCarte afficherCarte;
     private Case casePlateau;
-    private De de;
+    private NewDice de;
     private CamSwitch camSwitch;
     private bool tourFini;
     private int moisActuel;
@@ -20,13 +19,11 @@ public class Joueur : MonoBehaviour
     public void lancerDe()
     {
         tourFini = false;
-        camSwitch.cameraDe();
         de.lancerDe(this);
     }
 
     public void avancer(int valeurDe)
     {
-        print(valeurDe);
         camSwitch.cameraPlateau();
         int numCaseFinale = valeurDe + casePlateau.getNumCase();
         if (numCaseFinale >= 31)
@@ -49,7 +46,6 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         casePlateau = plateau.getCase(numCaseFinale);
-        print("Il tombe sur la case: " + casePlateau.getTypeCase());
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
         afficherCarte.chargerPrefab(carteData);
@@ -79,7 +75,7 @@ public class Joueur : MonoBehaviour
     {
         caseDepart();
         camSwitch = GameObject.Find("CamManager").GetComponent<CamSwitch>();
-        de = GameObject.Find("dice").GetComponent<De>();
+        de = GameObject.Find("Button").GetComponent<NewDice>();
         this.moisActuel = 1;
     }
 
