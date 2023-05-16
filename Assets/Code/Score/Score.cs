@@ -6,11 +6,13 @@ public class Score
 {
     public int montant;
 
-    public int getMontant() {
+    public int getMontant()
+    {
         return montant;
     }
 
-    public void setMontant(int valeur) {
+    public void setMontant(int valeur)
+    {
         montant = valeur;
     }
 
