@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Score
 {
+    
+
     public int montant;
 
     public int getMontant() {
