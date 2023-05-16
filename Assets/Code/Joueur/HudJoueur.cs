@@ -25,6 +25,10 @@ public class HudJoueur : MonoBehaviour
     public void setScore(CarteData carteData) {
         Cagnotte cagnotte = jeu.getCagnotte();
         action.actionCarte(scoreJoueur, cagnotte, carteData);
+        miseAJourDesScores();
+    }
+
+    public void miseAJourDesScores(){
         text.text = scoreJoueur.ToString();
         textAcquisition.text = scoreJoueur.inventaireToString();
     }
@@ -37,4 +41,9 @@ public class HudJoueur : MonoBehaviour
         return scoreJoueur.getMontant();
     }
 
+    public void obtenirPaye()
+    {
+        scoreJoueur.obtenirPaye();
+        miseAJourDesScores();
+    }
 }
