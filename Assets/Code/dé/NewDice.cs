@@ -11,6 +11,7 @@ public class NewDice : MonoBehaviour
     {
         Button btn = yourButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
+        yourButton.interactable = false;
     }
 
     void TaskOnClick()

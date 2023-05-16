@@ -19,6 +19,7 @@ public class Joueur : MonoBehaviour
     private string prefabName;
     private const float TEMPS_ATTENTE = 0.5f;
     private const int NB_JOUR_MAX = 31;
+    private string nomJoueur;
 
     public IEnumerator effectuerUnTour(){
         tourFini = false;
@@ -137,5 +138,17 @@ public class Joueur : MonoBehaviour
 
     public void initialiserScoreJoueur(HudJoueur hudJoueur){
         this.hudJoueur = hudJoueur;
+    }
+
+    public int getArgent(){
+        return hudJoueur.getScore();
+    }
+
+    public void setNomJoueur(string s){
+        nomJoueur = s;
+    }
+
+    public string getNomJoueur(){
+        return nomJoueur;
     }
 }
