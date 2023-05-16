@@ -28,4 +28,8 @@ public class HudJoueur : MonoBehaviour
         this.jeu = jeu;
     }
 
+    public int getScore(){
+        return scoreJoueur.getMontant();
+    }
+
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cartes;
+using UnityEngine.SceneManagement;
 
 public class Jeu : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class Jeu : MonoBehaviour
         } while (moisActuel <= nbMois);
 
         print("Partie Finie");
+        afficherFinPartie();
     }
 
     public Cagnotte getCagnotte()
@@ -89,6 +91,7 @@ public class Jeu : MonoBehaviour
             if(i < joueurs.Length){
                 joueurs[i] = j.GetComponent<Joueur>();
                 joueurs[i].caseDepart();
+                joueurs[i].setNomJoueur("Joueur"+(i+1));
             } else {
                 j.SetActive(false);
             }
@@ -126,5 +129,11 @@ public class Jeu : MonoBehaviour
     public int tourJoueurSuivant(int tourDuJoueur){
         return (tourDuJoueur + 1) % joueurs.Length;
     }
+
+    public void afficherFinPartie(){
+        globalVars = FindObjectOfType<GlobalVariable>();
+        globalVars.setJoueur(joueurs);
+        SceneManager.LoadScene("FinDeGame");
+    }    
 }
 
