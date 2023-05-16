@@ -6,8 +6,8 @@ using Cartes;
 public class ScoreJoueur : Score
 {
         private CarteData inventaire;
-
         private const int MONTANT_INITIAL = 650;
+        private const int PAYE = 1500;
 
         public ScoreJoueur() {
             montant = MONTANT_INITIAL;
@@ -20,6 +20,10 @@ public class ScoreJoueur : Score
 
         public void setInventaire(CarteData carte) {
             inventaire = carte;
+        }
+
+        public void obtenirPaye(){
+            montant += PAYE;
         }
 
         public bool estVide() {
