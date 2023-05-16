@@ -8,6 +8,8 @@ public class GlobalVariable : MonoBehaviour
 
     private int nbJoueur;
 
+    private Joueur[] joueurs;
+
     private static GlobalVariable instance;
 
     private void Awake()
@@ -37,6 +39,14 @@ public class GlobalVariable : MonoBehaviour
 
     public int getNbJoueur(){
         return nbJoueur;
+    }
+
+    public void setJoueur(Joueur[] j){
+        joueurs = j;
+    }
+
+    public Joueur[] GetJoueurs(){
+        return joueurs;
     }
     
 }
