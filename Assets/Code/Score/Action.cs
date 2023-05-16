@@ -68,20 +68,22 @@ public class Action
     }
 */
     public void achat(ScoreJoueur acheteur, CarteData carte) {
-        if (acheteur.getMontant() >= carte.getValeur()) {
-            acheteur.setMontant(acheteur.getMontant() - carte.getValeur());
-            acheteur.getInventaire().Add(carte);
+        if (acheteur.estVide()) {
+            if (acheteur.getMontant() >= carte.getValeur()) {
+                acheteur.setMontant(acheteur.getMontant() - carte.getValeur());
+                acheteur.setInventaire(carte);
+            } else {
+                Debug.Log("Pas assez d'argent");
+            }
         } else {
-            Debug.Log("Pas assez d'argent");
+                Debug.Log("Inventaire plein !");
         }
     }
 
     public void vente(ScoreJoueur vendeur) {
-        if (vendeur.getInventaire().Count > 0) {
-            // Demander Ã  l'utilisateur quelle carte il veut vendre
-            int index = 0;
-            vendeur.setMontant(vendeur.getMontant() + vendeur.getInventaire()[index].getVente());
-            vendeur.getInventaire().RemoveAt(index);
+        if (!vendeur.estVide()) {
+            vendeur.setMontant(vendeur.getMontant() + vendeur.getInventaire().getVente());
+            vendeur.viderInventaire();
         } else {
             Debug.Log("Ton inventaire est vide");
         }

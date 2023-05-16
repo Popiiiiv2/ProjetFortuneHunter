@@ -100,13 +100,14 @@ public class Jeu : MonoBehaviour
 
     // initialisation des Huds Joueurs
     public void InitialisationDesHud(){
-        for(int i =0; i < NB_MAX_JOUEUR; i++){
+        for(int i = 0; i < NB_MAX_JOUEUR; i++){
             string str = "HUDJ"+(i+1);
             GameObject gm = GameObject.Find(str);
             HudJoueur hud = gm.GetComponent<HudJoueur>();
             if(i < joueurs.Length) {
                 str = "ScoreJoueur"+(i+1);
-                hud.initialiserScoreJoueur(str);
+                string strAcquisition = "TextAcquisition"+(i+1);
+                hud.initialiserScoreJoueur(str, strAcquisition);
                 hud.setJeu(this);
                 joueurs[i].initialiserScoreJoueur(hud);
             } else {
