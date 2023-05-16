@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cartes;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Jeu : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Jeu : MonoBehaviour
     private const float TEMPS_ATTENTE = 1f;
     private const int NB_MAX_JOUEUR = 4;
     private const int NB_JOUR_MAX = 31;
+    private Text textCagnotte;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class Jeu : MonoBehaviour
         RecuperationDesVariables();
         // Initialisation de la cagnotte
         this.cagnotte = new Cagnotte();
+        textCagnotte = GameObject.Find("Argent").GetComponent<Text>();
+        textCagnotte.text = cagnotte.ToString();
         InitialisationDesJoueurs();
         InitialisationDesHud();
         CreationPlateau();
@@ -52,6 +56,7 @@ public class Jeu : MonoBehaviour
             }
             moisActuel = getMoisActuel(moisActuel, j);
             tourDuJoueur = tourJoueurSuivant(tourDuJoueur);
+            textCagnotte.text = cagnotte.ToString();
         } while (moisActuel <= nbMois);
 
         print("Partie Finie");

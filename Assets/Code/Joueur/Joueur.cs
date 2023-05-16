@@ -17,7 +17,7 @@ public class Joueur : MonoBehaviour
     private CarteControleur paquet;
     private HudJoueur hudJoueur;
     private string prefabName;
-    private const float TEMPS_ATTENTE = 0.5f;
+    private const float TEMPS_ATTENTE = 0.2f;
     private const int NB_JOUR_MAX = 31;
     private string nomJoueur;
 
@@ -26,6 +26,11 @@ public class Joueur : MonoBehaviour
         de.lancerDe();
         while(de.getValeurDe() == 0){
             yield return new WaitForSeconds(TEMPS_ATTENTE);
+        }
+        if(de.getValeurDe() == 6){
+            int montantCagnotte = jeu.getCagnotte().getMontant();
+            hudJoueur.getArgentCagnotte(montantCagnotte);
+            jeu.getCagnotte().reinitialiserCagnotte();
         }
         avancer(de.getValeurDe());
     }
@@ -53,6 +58,9 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
         casePlateau = plateau.getCase(numCaseFinale);
+        if(numCaseFinale == NB_JOUR_MAX){
+            hudJoueur.obtenirPaye();
+        }
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
         chargerPrefab(carteData);

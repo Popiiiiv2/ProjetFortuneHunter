@@ -5,7 +5,11 @@ public class Cagnotte : Score
     }
     
     public override string ToString() {
-        return "Cagnotte : "+montant+" €";
+        return montant+" €";
+    }
+
+    public void reinitialiserCagnotte(){
+        this.montant = 0;
     }
 
 }
