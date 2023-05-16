@@ -28,9 +28,7 @@ public class GestionEcranFin : MonoBehaviour
     public void afficherFinPartie(){
         for(int i = 1; i <= topNom.Length; i++){
             string str = "topNom"+i;
-            print(str);
             Text j = GameObject.Find(str).GetComponent<Text>();
-            print(j);
             topNom[i-1] = j;
             str = "topScore"+i;
             j = GameObject.Find(str).GetComponent<Text>();
