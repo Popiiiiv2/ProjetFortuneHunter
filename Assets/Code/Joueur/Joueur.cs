@@ -12,26 +12,30 @@ public class Joueur : MonoBehaviour
     public GameObject prefabObjetJoueur;
     private Case casePlateau;
     private NewDice de;
-    private CamSwitch camSwitch;
     private bool tourFini;
     private int moisActuel;
     private CarteControleur paquet;
     private HudJoueur hudJoueur;
     private string prefabName;
+    private const float TEMPS_ATTENTE = 0.5f;
+    private const int NB_JOUR_MAX = 31;
+    private string nomJoueur;
 
-    public void lancerDe()
-    {
+    public IEnumerator effectuerUnTour(){
         tourFini = false;
-        de.lancerDe(this);
+        de.lancerDe();
+        while(de.getValeurDe() == 0){
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
+        }
+        avancer(de.getValeurDe());
     }
 
     public void avancer(int valeurDe)
     {
-        camSwitch.cameraPlateau();
         int numCaseFinale = valeurDe + casePlateau.getNumCase();
-        if (numCaseFinale >= 31)
+        if (numCaseFinale >= NB_JOUR_MAX)
         {
-            numCaseFinale = 31;
+            numCaseFinale = NB_JOUR_MAX;
             moisActuel++;
         }
         StartCoroutine(deplacerJoueur(numCaseFinale));
@@ -41,12 +45,12 @@ public class Joueur : MonoBehaviour
     {
         CarteData carteData = new CarteData();
         int numCasePlateauSuivante = casePlateau.getNumCase() + 1;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(TEMPS_ATTENTE);
         for (int i = numCasePlateauSuivante; i <= numCaseFinale; i++)
         {
             Case caseSuivante = plateau.getCase(i);
             this.transform.position = caseSuivante.transform.position;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
         casePlateau = plateau.getCase(numCaseFinale);
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
@@ -55,6 +59,7 @@ public class Joueur : MonoBehaviour
         afficherTexteCarte(carteData);
         hudJoueur.setScore(carteData);
         supprimerPrefab();
+        yield return new WaitForSeconds(TEMPS_ATTENTE);
         tourFini = true;
     }
 
@@ -76,7 +81,6 @@ public class Joueur : MonoBehaviour
     void Start()
     {
         caseDepart();
-        camSwitch = GameObject.Find("CamManager").GetComponent<CamSwitch>();
         de = GameObject.Find("Button").GetComponent<NewDice>();
         this.moisActuel = 1;
     }
@@ -134,5 +138,17 @@ public class Joueur : MonoBehaviour
 
     public void initialiserScoreJoueur(HudJoueur hudJoueur){
         this.hudJoueur = hudJoueur;
+    }
+
+    public int getArgent(){
+        return hudJoueur.getScore();
+    }
+
+    public void setNomJoueur(string s){
+        nomJoueur = s;
+    }
+
+    public string getNomJoueur(){
+        return nomJoueur;
     }
 }

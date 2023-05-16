@@ -3,33 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cartes;
 
-public class ScoreJoueur
+public class ScoreJoueur : Score
 {
-        public List<CarteData> inventaire = new List<CarteData>();
+        private CarteData inventaire;
 
-        private int montant;
+        private const int MONTANT_INITIAL = 650;
 
-        private static int MONTANT_INITIAL = 650;
-
-        public ScoreJoueur(){
+        public ScoreJoueur() {
             montant = MONTANT_INITIAL;
+            inventaire = null;
         }
 
-        public List<CarteData> getInventaire() {
+        public CarteData getInventaire() {
             return inventaire;
+        }
+
+        public void setInventaire(CarteData carte) {
+            inventaire = carte;
+        }
+
+        public bool estVide() {
+            return inventaire == null;
+        }
+
+        public void viderInventaire() {
+            inventaire = null;
         }
 
         public override string ToString() {
             return montant+" €";
         }
 
-        public void setMontant(int montant) {
-            this.montant = montant;
-        }
-
-        public int getMontant(){
-            return montant;
+        public string inventaireToString() {
+            if (!estVide()) {
+                return "Inventaire :\n"+getInventaire().getDescription();
+            } else {
+                return "Inventaire vide !";
+            }
         }
 }
-
-
