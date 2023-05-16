@@ -149,7 +149,7 @@
       "description": "Vous vous inscrivez pour l'évènement le plus attendu de l'année : le week-end d'intégration !\nVous versez 125€ dans la cagnotte",
       "titre": "Week-end d'intégration",
       "type": "Event",
-      "valeur": "1250",
+      "valeur": "125",
       "fichier": "",
       "action": "Cagnotte"
     },
@@ -160,7 +160,7 @@
       "type": "Event",
       "valeur": "50",
       "fichier": "",
-      "action": "Gain"
+      "action": "Cagnotte"
     },
     {
       "id": "18",

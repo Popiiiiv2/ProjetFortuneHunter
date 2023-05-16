@@ -46,4 +46,8 @@ public class HudJoueur : MonoBehaviour
         scoreJoueur.obtenirPaye();
         miseAJourDesScores();
     }
+
+    public void getArgentCagnotte(int argentCagnotte){
+        scoreJoueur.setMontant(scoreJoueur.getMontant() + argentCagnotte);
+    }
 }

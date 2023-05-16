@@ -27,6 +27,11 @@ public class Joueur : MonoBehaviour
         while(de.getValeurDe() == 0){
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
+        if(de.getValeurDe() == 6){
+            int montantCagnotte = jeu.getCagnotte().getMontant();
+            hudJoueur.getArgentCagnotte(montantCagnotte);
+            jeu.getCagnotte().reinitialiserCagnotte();
+        }
         avancer(de.getValeurDe());
     }
 
