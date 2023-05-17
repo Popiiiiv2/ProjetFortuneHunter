@@ -6,8 +6,6 @@ using UnityEngine.TestTools;
 
 public class TestPlateau
 {
-
-    private Case cases;
     private Plateau plateau;
 
     [SetUp]
@@ -15,20 +13,25 @@ public class TestPlateau
     {
         GameObject go = new GameObject();
         plateau = go.AddComponent<Plateau>();
+        plateau.creerCases();
     }
 
-    /*[TearDown]
+    [TearDown]
     public void TearDown()
     {
         plateau = null;
-    }*/
+    }
 
 
     [Test]
     public void testCreerCases(){
-        plateau.creerCases();
-        Debug.Log(plateau);
         Assert.AreEqual(plateau.getCases().Length, 32);
+    }
+
+    [Test]
+    public void testSetNumCase(){
+        plateau.setNumCase();
+        Assert.AreEqual(plateau.getCase(2).getNumCase(), 2);
     }
 
 }

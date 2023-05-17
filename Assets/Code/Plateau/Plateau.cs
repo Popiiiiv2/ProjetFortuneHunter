@@ -36,7 +36,7 @@ public class Plateau : MonoBehaviour
         }
     }
 
-    void Start()
+    public void CreationPlateau()
     {
         creerCases();
         setNumCase(); 
