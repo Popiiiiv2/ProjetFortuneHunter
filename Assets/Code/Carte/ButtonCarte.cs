@@ -36,7 +36,7 @@ public class ButtonCarte : MonoBehaviour
                     break;
                 case "Annuler":
                     btn = obj.GetComponent<Button>();
-                    btn.onClick.AddListener(() => validerEvenement(obj));
+                    btn.onClick.AddListener(() => annulerEvenement(obj));
                     break;
             }
         }
