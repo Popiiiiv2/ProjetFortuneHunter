@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cartes;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Jeu : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class Jeu : MonoBehaviour
     private const float TEMPS_ATTENTE = 1f;
     private const int NB_MAX_JOUEUR = 4;
     private const int NB_JOUR_MAX = 31;
+    private Text textCagnotte;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,8 @@ public class Jeu : MonoBehaviour
         RecuperationDesVariables();
         // Initialisation de la cagnotte
         this.cagnotte = new Cagnotte();
+        textCagnotte = GameObject.Find("Argent").GetComponent<Text>();
+        textCagnotte.text = cagnotte.ToString();
         InitialisationDesJoueurs();
         InitialisationDesHud();
         CreationPlateau();
@@ -51,9 +56,11 @@ public class Jeu : MonoBehaviour
             }
             moisActuel = getMoisActuel(moisActuel, j);
             tourDuJoueur = tourJoueurSuivant(tourDuJoueur);
+            textCagnotte.text = cagnotte.ToString();
         } while (moisActuel <= nbMois);
 
         print("Partie Finie");
+        afficherFinPartie();
     }
 
     public Cagnotte getCagnotte()
@@ -89,6 +96,7 @@ public class Jeu : MonoBehaviour
             if(i < joueurs.Length){
                 joueurs[i] = j.GetComponent<Joueur>();
                 joueurs[i].caseDepart();
+                joueurs[i].setNomJoueur("Joueur"+(i+1));
             } else {
                 j.SetActive(false);
             }
@@ -97,13 +105,14 @@ public class Jeu : MonoBehaviour
 
     // initialisation des Huds Joueurs
     public void InitialisationDesHud(){
-        for(int i =0; i < NB_MAX_JOUEUR; i++){
+        for(int i = 0; i < NB_MAX_JOUEUR; i++){
             string str = "HUDJ"+(i+1);
             GameObject gm = GameObject.Find(str);
             HudJoueur hud = gm.GetComponent<HudJoueur>();
             if(i < joueurs.Length) {
                 str = "ScoreJoueur"+(i+1);
-                hud.initialiserScoreJoueur(str);
+                string strAcquisition = "TextAcquisition"+(i+1);
+                hud.initialiserScoreJoueur(str, strAcquisition);
                 hud.setJeu(this);
                 joueurs[i].initialiserScoreJoueur(hud);
             } else {
@@ -126,5 +135,11 @@ public class Jeu : MonoBehaviour
     public int tourJoueurSuivant(int tourDuJoueur){
         return (tourDuJoueur + 1) % joueurs.Length;
     }
+
+    public void afficherFinPartie(){
+        globalVars = FindObjectOfType<GlobalVariable>();
+        globalVars.setJoueur(joueurs);
+        SceneManager.LoadScene("FinDeGame");
+    }    
 }
 
