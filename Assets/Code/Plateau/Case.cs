@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Case : MonoBehaviour
 {
-    public Plateau plateau;
     private TypeCase typeCase;
     private int numCase;
 

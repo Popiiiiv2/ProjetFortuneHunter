@@ -66,6 +66,7 @@ public static class TypeCaseExtensions
     public static int[] caseDisponible(int[] tab, TypeCase typeDernièreCase)
     {
         List<int> list = new List<int>();
+
         if (tab[0] != 0 && typeDernièreCase != TypeCase.BROCANTE)
         {
             list.Add(1);
@@ -82,6 +83,7 @@ public static class TypeCaseExtensions
         {
             list.Add(4);
         }
+
         if (list.Count == 0)
         {
             for (int i = 0; i < 4; i++)
@@ -92,6 +94,7 @@ public static class TypeCaseExtensions
                 }
             }
         }
+        
         return list.ToArray();
     }
 }
