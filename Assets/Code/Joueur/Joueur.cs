@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using Cartes;
 
 public class Joueur : MonoBehaviour
@@ -68,7 +67,6 @@ public class Joueur : MonoBehaviour
         while (estActionJouer())
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
-            Debug.Log(estActionJouer());
         }
         hudJoueur.setScore(carteData);
         yield return new WaitForSeconds(TEMPS_ATTENTE);

@@ -49,28 +49,24 @@ public class ButtonCarte : MonoBehaviour
 
     private void validerEvenement(GameObject obj)
     {
-        Debug.Log("Valider");
         jeu.setAction("Valider");
         destroyObjet();
     }
 
     private void vendreEvenement(GameObject obj)
     {
-        Debug.Log("Vendre");
         jeu.setAction("Vendre");
         destroyObjet();
     }
 
     private void acheterEvenement(GameObject obj)
     {
-        Debug.Log("Acheter");
         jeu.setAction("Acheter");
         destroyObjet();
     }
 
     private void annulerEvenement(GameObject obj)
     {
-        Debug.Log("Annuler");
         jeu.setAction("Annuler");
         destroyObjet();
     }
