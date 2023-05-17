@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class Plateau : MonoBehaviour
 {
-    public Case[] tabCase;
+    private Case[] tabCase;
     private int TAILLE_MAX = 32;
     private static int NOMBRE_MAX_EVENEMENT = 11;
     private static int NOMBRE_MAX_PARI_SPORTIF = 1;
     private static int NOMBRE_MAX_BROCANTE = 6;
     private static int NOMBRE_MAX_MAIL = 8;
     private static int[] tab = {NOMBRE_MAX_BROCANTE, NOMBRE_MAX_PARI_SPORTIF, NOMBRE_MAX_EVENEMENT, NOMBRE_MAX_MAIL };
-
 
     public Case getCase(int numCase)
     {
@@ -39,8 +38,17 @@ public class Plateau : MonoBehaviour
 
     void Start()
     {
+        creerCases();
         setNumCase(); 
         setUpCases();
+   }
+
+   public void creerCases(){
+        tabCase = new Case[TAILLE_MAX];
+        for(int i = 0; i < TAILLE_MAX; i++){
+            string str = "Case" + i;
+            tabCase[i] = GameObject.Find(str).GetComponent<Case>();
+        } 
    }
 
    public static void enleverUn(int i){
@@ -68,4 +76,7 @@ public class Plateau : MonoBehaviour
         cas.GetComponent<Renderer>().material.color = TypeCaseExtensions.GetCouleur(typeCase);
     }
 
+    public Case[] getCases(){
+        return tabCase;
+    }
 }
