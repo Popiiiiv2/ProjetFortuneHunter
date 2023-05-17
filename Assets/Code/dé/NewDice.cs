@@ -25,7 +25,7 @@ public class NewDice : MonoBehaviour
 
     public void lancerDe()
     {
-        valeurDe = 0;
+        valeurDe = 31;
         yourButton.interactable = true;
     }
 

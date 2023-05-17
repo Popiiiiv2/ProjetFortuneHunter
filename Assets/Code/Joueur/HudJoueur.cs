@@ -12,8 +12,10 @@ public class HudJoueur : MonoBehaviour
     private Action action;
     private Jeu jeu;
     private Text textAcquisition;
+    private GlobalVariable globalVariable;
 
-    public void initialiserScoreJoueur(string score, string textAcqui){
+    public void initialiserScoreJoueur(string score, string textAcqui)
+    {
         this.scoreJoueur = new ScoreJoueur();
         text = GameObject.Find(score).GetComponent<Text>();
         text.text = scoreJoueur.ToString();
@@ -25,19 +27,26 @@ public class HudJoueur : MonoBehaviour
     public void setScore(CarteData carteData)
     {
         Cagnotte cagnotte = jeu.getCagnotte();
-        if (carteData.getType() == "Email" || carteData.getType() == "Event") {
+        if (carteData.getType() == "Email" || carteData.getType() == "Event")
+        {
             action.actionCarte(scoreJoueur, cagnotte, carteData);
-        } else if (carteData.getType() == "Brocante") {
-            if (!scoreJoueur.estVide()) {
+        }
+        else if (carteData.getType() == "Brocante")
+        {
+            if (!scoreJoueur.estVide())
+            {
                 action.vente(scoreJoueur);
-            } else {
+            }
+            else
+            {
                 action.achat(scoreJoueur, carteData);
             }
         }
         miseAJourDesScores();
     }
 
-    public void miseAJourDesScores(){
+    public void miseAJourDesScores()
+    {
         text.text = scoreJoueur.ToString();
         textAcquisition.text = scoreJoueur.inventaireToString();
     }
@@ -47,7 +56,8 @@ public class HudJoueur : MonoBehaviour
         this.jeu = jeu;
     }
 
-    public ScoreJoueur getScore(){
+    public ScoreJoueur getScore()
+    {
         return scoreJoueur;
     }
 
@@ -57,7 +67,28 @@ public class HudJoueur : MonoBehaviour
         miseAJourDesScores();
     }
 
-    public void getArgentCagnotte(int argentCagnotte){
+    public void afficherNomJoueur(Joueur j, int i)
+    {
+        globalVariable = FindObjectOfType<GlobalVariable>();
+        int nbJoueur = globalVariable.getNbJoueur();
+        string objText = "NomJoueur" + i;
+        GameObject obj = GameObject.Find(objText);
+        Text text = obj.GetComponent<Text>();
+        string nom = globalVariable.getNomJoueur(i - 1);
+        if (nom == null || nom == "")
+        {
+            text.text = "Joueur " + i;
+            j.setNomJoueur("Joueur " + i);
+        }
+        else
+        {
+            text.text = nom;
+            j.setNomJoueur(nom);
+        }
+    }
+
+    public void getArgentCagnotte(int argentCagnotte)
+    {
         scoreJoueur.setMontant(scoreJoueur.getMontant() + argentCagnotte);
     }
 }
