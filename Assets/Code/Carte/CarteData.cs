@@ -1,3 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+
 namespace Cartes
 {
     [System.Serializable]
@@ -48,6 +53,11 @@ namespace Cartes
         public string getAction()
         {
             return action;
+        }
+
+        public void setAction(string act)
+        {
+            action = act;
         }
     }
 }
