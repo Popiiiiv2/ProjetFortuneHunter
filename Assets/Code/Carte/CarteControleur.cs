@@ -19,22 +19,6 @@ namespace Cartes
             nouveauPaquet();
         }
 
-        // void Start()
-        // {
-        //     cheminDossier = Application.dataPath + "\\code\\jsonDonnee\\";
-        //     nouveauPaquet(TypeCase.EVENEMENT);
-        //     Debug.Log(tirerRandomCarte().getType());
-        //     nouveauPaquet(TypeCase.MAIL);
-        //     Debug.Log(tirerRandomCarte().getType());
-        //     nouveauPaquet(TypeCase.BROCANTE);
-        //     Debug.Log(this.paquet.getList()[0].getType());
-        //     Debug.Log(tirerRandomCarte().getType());
-        //     Debug.Log(tirerRandomCarte().getType());
-        //     Debug.Log(tirerRandomCarte().getType());
-        //     Debug.Log(tirerRandomCarte().getType());
-        //     Debug.Log(tirerRandomCarte().getType());
-        //     Debug.Log(estVide());
-        // }
         //Génère un nouveau paquet en fonction du type passer en param
         public void nouveauPaquet()
         {
@@ -73,17 +57,20 @@ namespace Cartes
         public CarteData tirerRandomCarte()
         {
             CarteData carte;
-            if(!estVide()){
+            if (!estVide())
+            {
                 int random = Random.Range(0, paquet.getList().Count);
                 carte = paquet.getList()[random];
                 retirerCartePaquet(random);
-            }else {
+            }
+            else
+            {
                 nouveauPaquet();
                 int random = Random.Range(0, paquet.getList().Count);
                 carte = paquet.getList()[random];
                 retirerCartePaquet(random);
             }
-            
+
             return carte;
         }
 

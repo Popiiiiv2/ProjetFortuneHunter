@@ -15,6 +15,7 @@ public class Jeu : MonoBehaviour
     private const float TEMPS_ATTENTE = 1f;
     private const int NB_MAX_JOUEUR = 4;
     private const int NB_JOUR_MAX = 31;
+    private string action;
 
     // Start is called before the first frame update
     void Start()
@@ -40,13 +41,15 @@ public class Jeu : MonoBehaviour
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
             Joueur j = joueurs[tourDuJoueur];
-            print("Tour du joueur: "+(tourDuJoueur+1));
+            print("Tour du joueur: " + (tourDuJoueur + 1));
             StartCoroutine(j.effectuerUnTour());
-            do{
+            do
+            {
                 yield return new WaitForSeconds(TEMPS_ATTENTE);
             } while (!j.isTourFini());
-            if(SurCasePaye(j)){
-                print("Tour " + j.getMoisMax() + " fini par le joueur " + (tourDuJoueur+1));
+            if (SurCasePaye(j))
+            {
+                print("Tour " + j.getMoisMax() + " fini par le joueur " + (tourDuJoueur + 1));
                 j.caseDepart();
             }
             moisActuel = getMoisActuel(moisActuel, j);
@@ -61,20 +64,24 @@ public class Jeu : MonoBehaviour
         return cagnotte;
     }
 
-    void Update(){
-        foreach(GameObject gm in hudASupprimer){
+    void Update()
+    {
+        foreach (GameObject gm in hudASupprimer)
+        {
             gm.SetActive(false);
         }
     }
 
     // initialisation du plateau
-    public void CreationPlateau(){
+    public void CreationPlateau()
+    {
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
         plateau.setNumCase();
     }
 
     //récupération du nombre de joueurs et de mois
-    public void RecuperationDesVariables(){          
+    public void RecuperationDesVariables()
+    {
         globalVars = FindObjectOfType<GlobalVariable>();
         nbMois = globalVars.getNbMois();
         int nbJoueur = globalVars.getNbJoueur();
@@ -82,49 +89,72 @@ public class Jeu : MonoBehaviour
     }
 
     // initialisation des joueurs
-    public void InitialisationDesJoueurs(){
-        for(int i = 0; i < NB_MAX_JOUEUR; i++){
-            string str = "Joueur"+i;
+    public void InitialisationDesJoueurs()
+    {
+        for (int i = 0; i < NB_MAX_JOUEUR; i++)
+        {
+            string str = "Joueur" + i;
             GameObject j = GameObject.Find(str);
-            if(i < joueurs.Length){
+            if (i < joueurs.Length)
+            {
                 joueurs[i] = j.GetComponent<Joueur>();
                 joueurs[i].caseDepart();
-            } else {
+            }
+            else
+            {
                 j.SetActive(false);
             }
         }
     }
 
     // initialisation des Huds Joueurs
-    public void InitialisationDesHud(){
-        for(int i =0; i < NB_MAX_JOUEUR; i++){
-            string str = "HUDJ"+(i+1);
+    public void InitialisationDesHud()
+    {
+        for (int i = 0; i < NB_MAX_JOUEUR; i++)
+        {
+            string str = "HUDJ" + (i + 1);
             GameObject gm = GameObject.Find(str);
             HudJoueur hud = gm.GetComponent<HudJoueur>();
-            if(i < joueurs.Length) {
-                str = "ScoreJoueur"+(i+1);
+            if (i < joueurs.Length)
+            {
+                str = "ScoreJoueur" + (i + 1);
                 hud.initialiserScoreJoueur(str);
                 hud.setJeu(this);
                 joueurs[i].initialiserScoreJoueur(hud);
-            } else {
+            }
+            else
+            {
                 hudASupprimer.Add(gm);
             }
         }
     }
 
     // Verifie si le joueur est sur la case Paye
-    public bool SurCasePaye(Joueur j){
+    public bool SurCasePaye(Joueur j)
+    {
         return j.getCase().getNumCase() == NB_JOUR_MAX;
     }
 
     // Renvoie le mois maximal qui est joué
-    public int getMoisActuel(int moisActuel, Joueur j){
+    public int getMoisActuel(int moisActuel, Joueur j)
+    {
         return Mathf.Max(moisActuel, j.getMoisMax());
     }
 
     // Récupère le score du joueur
-    public int tourJoueurSuivant(int tourDuJoueur){
+    public int tourJoueurSuivant(int tourDuJoueur)
+    {
         return (tourDuJoueur + 1) % joueurs.Length;
+    }
+
+    public void setAction(string action)
+    {
+        this.action = action;
+    }
+
+    public string getAction()
+    {
+        return action;
     }
 }
 

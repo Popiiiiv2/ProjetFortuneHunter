@@ -52,14 +52,20 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
         casePlateau = plateau.getCase(numCaseFinale);
+
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
         afficherCarte.chargerPrefab(carteData);
         afficherCarte.afficherTexteCarte(carteData);
-        print(carteData.description);
+        while (estActionJouer())
+        {
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
+            Debug.Log(estActionJouer());
+        }
         hudJoueur.setScore(carteData);
         yield return new WaitForSeconds(TEMPS_ATTENTE);
         tourFini = true;
+        jeu.setAction(null);
     }
 
     public Case getCase()
@@ -94,5 +100,10 @@ public class Joueur : MonoBehaviour
     public void initialiserScoreJoueur(HudJoueur hudJoueur)
     {
         this.hudJoueur = hudJoueur;
+    }
+
+    public bool estActionJouer()
+    {
+        return jeu.getAction() == null;
     }
 }
