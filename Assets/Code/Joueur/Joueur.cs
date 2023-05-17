@@ -61,16 +61,26 @@ public class Joueur : MonoBehaviour
         if(numCaseFinale == NB_JOUR_MAX){
             hudJoueur.obtenirPaye();
         }
-        paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
-        carteData = paquet.tirerRandomCarte();
-        afficherCarte.chargerPrefab(carteData);
-        afficherCarte.afficherTexteCarte(carteData);
+        if (casePlateau.getTypeCase() == TypeCase.BROCANTE && !hudJoueur.getScore().estVide()) {
+            carteData = hudJoueur.getScore().getInventaire();
+            carteData.setAction("Gain");
+            afficherCarte.chargerPrefab(carteData);
+            afficherCarte.afficherTexteCarte(carteData);
+
+        } else {
+            paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
+            carteData = paquet.tirerRandomCarte();
+            afficherCarte.chargerPrefab(carteData);
+            afficherCarte.afficherTexteCarte(carteData);
+        }
         while (estActionJouer())
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
             Debug.Log(estActionJouer());
         }
-        hudJoueur.setScore(carteData);
+        if (jeu.getAction() != "Annuler") {
+            hudJoueur.setScore(carteData);
+        }
         yield return new WaitForSeconds(TEMPS_ATTENTE);
         tourFini = true;
         jeu.setAction(null);
@@ -111,7 +121,7 @@ public class Joueur : MonoBehaviour
     }
 
     public int getArgent(){
-        return hudJoueur.getScore();
+        return hudJoueur.getScore().getMontant();
     }
 
     public void setNomJoueur(string s){

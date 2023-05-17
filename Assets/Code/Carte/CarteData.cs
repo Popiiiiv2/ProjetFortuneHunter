@@ -54,5 +54,10 @@ namespace Cartes
         {
             return action;
         }
+
+        public void setAction(string act)
+        {
+            action = act;
+        }
     }
 }

@@ -25,7 +25,15 @@ public class HudJoueur : MonoBehaviour
     public void setScore(CarteData carteData)
     {
         Cagnotte cagnotte = jeu.getCagnotte();
-        action.actionCarte(scoreJoueur, cagnotte, carteData);
+        if (carteData.getType() == "Email" || carteData.getType() == "Event") {
+            action.actionCarte(scoreJoueur, cagnotte, carteData);
+        } else if (carteData.getType() == "Brocante") {
+            if (!scoreJoueur.estVide()) {
+                action.vente(scoreJoueur);
+            } else {
+                action.achat(scoreJoueur, carteData);
+            }
+        }
         miseAJourDesScores();
     }
 
@@ -39,8 +47,8 @@ public class HudJoueur : MonoBehaviour
         this.jeu = jeu;
     }
 
-    public int getScore(){
-        return scoreJoueur.getMontant();
+    public ScoreJoueur getScore(){
+        return scoreJoueur;
     }
 
     public void obtenirPaye()

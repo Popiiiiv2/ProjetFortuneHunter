@@ -17,8 +17,14 @@ namespace Cartes
             switch (carteData.getType())
             {
                 case "Brocante":
-                    nouvelObjet = Instantiate(prefabObjetBrocante);
-                    prefabName = "PrefabCarteBrocante(Clone)";
+                    if (carteData.getAction() == "Perte") {
+                        nouvelObjet = Instantiate(prefabObjetBrocante);
+                        prefabName = "PrefabCarteBrocante(Clone)";
+                    } else {
+                        nouvelObjet = Instantiate(prefabObjetJoueur);
+                        prefabName = "PrefabCarteBrocante(Clone)";
+
+                    }
                     break;
                 case "Pari":
                     nouvelObjet = Instantiate(prefabObjetCarte);
@@ -62,7 +68,7 @@ namespace Cartes
         {
             GameObject textObject = GameObject.Find("CarteAction_text");
             Text composantTexte = textObject.GetComponent<Text>();
-            composantTexte.text = "Gain : " + action;
+            composantTexte.text = action;
         }
 
         public void afficherTexteCarte(CarteData carteData)
@@ -73,7 +79,11 @@ namespace Cartes
             switch (carteData.getAction())
             {
                 case "Gain":
-                    text = "Gagner : " + carteData.getValeur();
+                    if (carteData.getType() =="Brocante") {
+                        text = "Gagner : " + carteData.getVente(); 
+                    } else {
+                         text = "Gagner : " + carteData.getValeur();
+                    }
                     actionCarte(text);
                     break;
                 case "Perte":

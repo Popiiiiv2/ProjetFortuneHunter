@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Case : MonoBehaviour
 {
-    public Plateau plateau;
     private TypeCase typeCase;
     private int numCase;
 
