@@ -47,24 +47,25 @@ public class Plateau : MonoBehaviour
         tab[i]--;
    }
 
-    /*set-up pour les cases
-    /!\/!\/!\ NE SURTOUT PAS LIRE CETTE FONCTION /!\/!\/!\
-    */
+    //set-up pour les cases
     public void setUpCases(){
-        TypeCase typeDernièreCase = TypeCase.DIMANCHE; 
-        for(int i = 1; i < 31; i++){
-            if(i%7 == 0){
-                tabCase[i].setTypeCase(TypeCase.DIMANCHE);
-                tabCase[i].GetComponent<Renderer>().material.color = TypeCaseExtensions.GetCouleur(TypeCase.DIMANCHE);
-                typeDernièreCase = TypeCase.DIMANCHE;
-            } else {
-                TypeCase typeCase = TypeCaseExtensions.getRandomTypeCase(tab, typeDernièreCase);
-                tabCase[i].setTypeCase(typeCase);
-                tabCase[i].GetComponent<Renderer>().material.color = TypeCaseExtensions.GetCouleur(typeCase);
-                typeDernièreCase = typeCase;
-            }
+        TypeCase typeDernièreCase = TypeCase.DIMANCHE;
+        for (int i = 1; i < TAILLE_MAX-1; i++) {
+        if (i % 7 == 0) {
+            setTypeAndColor(tabCase[i], TypeCase.DIMANCHE);
+            typeDernièreCase = TypeCase.DIMANCHE;
+        } else {
+            TypeCase typeCase = TypeCaseExtensions.getRandomTypeCase(tab, typeDernièreCase);
+            setTypeAndColor(tabCase[i], typeCase);
+            typeDernièreCase = typeCase;
         }
-        tabCase[31].setTypeCase(TypeCase.PAYE);
-        tabCase[31].GetComponent<Renderer>().material.color = TypeCaseExtensions.GetCouleur(TypeCase.PAYE);
+        setTypeAndColor(tabCase[31], TypeCase.PAYE);
+        }
     }
+
+    private void setTypeAndColor(Case cas, TypeCase typeCase) {
+        cas.setTypeCase(typeCase);
+        cas.GetComponent<Renderer>().material.color = TypeCaseExtensions.GetCouleur(typeCase);
+    }
+
 }

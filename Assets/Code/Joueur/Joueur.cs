@@ -13,25 +13,47 @@ public class Joueur : MonoBehaviour
     private int moisActuel;
     private CarteControleur paquet;
     private HudJoueur hudJoueur;
-    private string prefabName;
     private const float TEMPS_ATTENTE = 0.2f;
     private const int NB_JOUR_MAX = 31;
     private string nomJoueur;
+    private bool finAction;
 
+    //effectuer un tour
     public IEnumerator effectuerUnTour()
     {
         tourFini = false;
         de.lancerDe();
+
+        // attendre la fin du lancer de dé
         while (de.getValeurDe() == 0)
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
+
+        // si il tombe sur 6, il récupère l'argent de la cagnotte
         if(de.getValeurDe() == 6){
-            int montantCagnotte = jeu.getCagnotte().getMontant();
-            hudJoueur.getArgentCagnotte(montantCagnotte);
-            jeu.getCagnotte().reinitialiserCagnotte();
+            recupererCagnotte();
         }
+
+        finAction = false;
         avancer(de.getValeurDe());
+        while(!finAction){
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
+        }
+
+        finAction = false;
+        StartCoroutine(piocherCarte());
+        while(!finAction){
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
+        }
+        tourFini = true;
+    }
+
+    //récupère l'argent de la cagnotte et met la cagnotte à 0
+    private void recupererCagnotte(){
+        int montantCagnotte = jeu.getCagnotte().getMontant();
+        hudJoueur.getArgentCagnotte(montantCagnotte);
+        jeu.getCagnotte().reinitialiserCagnotte();
     }
 
     public void avancer(int valeurDe)
@@ -44,10 +66,10 @@ public class Joueur : MonoBehaviour
         }
         StartCoroutine(deplacerJoueur(numCaseFinale));
     }
-    //tour du joueur
+
+    //déplace le joueur
     IEnumerator deplacerJoueur(int numCaseFinale)
-    {
-        CarteData carteData = new CarteData();
+    {        
         int numCasePlateauSuivante = casePlateau.getNumCase() + 1;
         yield return new WaitForSeconds(TEMPS_ATTENTE);
         for (int i = numCasePlateauSuivante; i <= numCaseFinale; i++)
@@ -56,10 +78,17 @@ public class Joueur : MonoBehaviour
             this.transform.position = caseSuivante.transform.position;
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
+
         casePlateau = plateau.getCase(numCaseFinale);
         if(numCaseFinale == NB_JOUR_MAX){
             hudJoueur.obtenirPaye();
         }
+        finAction = true;
+    }
+
+    //pioche une carte et effectue l'action
+    IEnumerator piocherCarte(){
+        CarteData carteData = new CarteData();
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
         afficherCarte.chargerPrefab(carteData);
@@ -69,9 +98,8 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
         hudJoueur.setScore(carteData);
-        yield return new WaitForSeconds(TEMPS_ATTENTE);
-        tourFini = true;
         jeu.setAction(null);
+        finAction = true;
     }
 
     public Case getCase()

@@ -11,28 +11,31 @@ public class Jeu : MonoBehaviour
     private Joueur[] joueurs;
     public PaquetsCartes paquets;
     private List<GameObject> hudASupprimer = new List<GameObject>();
-    private GlobalVariable globalVars;
-    private int nbMois;
+    private int nbMoisAJouer;
     private Cagnotte cagnotte;
     private const float TEMPS_ATTENTE = 1f;
     private const int NB_MAX_JOUEUR = 4;
     private const int NB_JOUR_MAX = 31;
-    private Text textCagnotte;
     private string action;
 
     // Start is called before the first frame update
     void Start()
     {
         RecuperationDesVariables();
+
         // Initialisation de la cagnotte
         this.cagnotte = new Cagnotte();
-        textCagnotte = GameObject.Find("Argent").GetComponent<Text>();
-        textCagnotte.text = cagnotte.ToString();
+        updateCagnotte();
+
+
+        //Initialisation du jeu
         InitialisationDesJoueurs();
         InitialisationDesHud();
         CreationPlateau();
+
         //initialisation du paquet
         paquets = new PaquetsCartes();
+
         //lancer la partie
         StartCoroutine(jouerPartie());
     }
@@ -42,25 +45,31 @@ public class Jeu : MonoBehaviour
     {
         int tourDuJoueur = 0;
         int moisActuel = 1;
+
         do
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
-            Joueur j = joueurs[tourDuJoueur];
+
+            Joueur joueurCourant = joueurs[tourDuJoueur];
             print("Tour du joueur: " + (tourDuJoueur + 1));
-            StartCoroutine(j.effectuerUnTour());
+            StartCoroutine(joueurCourant.effectuerUnTour());
+
             do
             {
                 yield return new WaitForSeconds(TEMPS_ATTENTE);
-            } while (!j.isTourFini());
-            if (SurCasePaye(j))
+            } while (!joueurCourant.isTourFini());
+
+            if (SurCasePaye(joueurCourant))
             {
-                print("Tour " + j.getMoisMax() + " fini par le joueur " + (tourDuJoueur + 1));
-                j.caseDepart();
+                print("Tour " + joueurCourant.getMoisMax() + " fini par le joueur " + (tourDuJoueur + 1));
+                joueurCourant.caseDepart();
             }
-            moisActuel = getMoisActuel(moisActuel, j);
+
+            moisActuel = getMoisActuel(moisActuel, joueurCourant);
             tourDuJoueur = tourJoueurSuivant(tourDuJoueur);
-            textCagnotte.text = cagnotte.ToString();
-        } while (moisActuel <= nbMois);
+            updateCagnotte();
+
+        } while (moisActuel <= nbMoisAJouer);
 
         print("Partie Finie");
         afficherFinPartie();
@@ -69,6 +78,11 @@ public class Jeu : MonoBehaviour
     public Cagnotte getCagnotte()
     {
         return cagnotte;
+    }
+
+    private void updateCagnotte(){
+        Text textCagnotte = GameObject.Find("Argent").GetComponent<Text>();
+        textCagnotte.text = cagnotte.ToString();
     }
 
     void Update()
@@ -89,8 +103,8 @@ public class Jeu : MonoBehaviour
     //récupération du nombre de joueurs et de mois
     public void RecuperationDesVariables()
     {
-        globalVars = FindObjectOfType<GlobalVariable>();
-        nbMois = globalVars.getNbMois();
+        GlobalVariable globalVars = FindObjectOfType<GlobalVariable>();
+        nbMoisAJouer = globalVars.getNbMois();
         int nbJoueur = globalVars.getNbJoueur();
         joueurs = new Joueur[nbJoueur];
     }
@@ -153,7 +167,7 @@ public class Jeu : MonoBehaviour
     }
 
     public void afficherFinPartie(){
-        globalVars = FindObjectOfType<GlobalVariable>();
+        GlobalVariable globalVars = FindObjectOfType<GlobalVariable>();
         globalVars.setJoueur(joueurs);
         SceneManager.LoadScene("FinDeGame");
     }    
