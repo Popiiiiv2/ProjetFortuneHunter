@@ -6,6 +6,8 @@ public class GlobalVariable : MonoBehaviour
 
     private int nbJoueur;
 
+    private string[] nomJoueur;
+
     private Joueur[] joueurs;
 
     private static GlobalVariable instance;
@@ -23,28 +25,45 @@ public class GlobalVariable : MonoBehaviour
         }
     }
 
-    public void setNbMois(string Mois){
+    public void setNomJoueur(int index, string nom)
+    {
+        nomJoueur[index] = nom;
+    }
+
+    public string getNomJoueur(int index)
+    {
+        return nomJoueur[index];
+    }
+
+    public void setNbMois(string Mois)
+    {
         this.nbMois = int.Parse(Mois);
     }
 
-    public int getNbMois(){
+    public int getNbMois()
+    {
         return nbMois;
     }
 
-    public void setNbJoueur(string nbJoueur){
+    public void setNbJoueur(string nbJoueur)
+    {
         this.nbJoueur = int.Parse(nbJoueur);
+        nomJoueur = new string[this.nbJoueur];
     }
 
-    public int getNbJoueur(){
+    public int getNbJoueur()
+    {
         return nbJoueur;
     }
 
-    public void setJoueur(Joueur[] j){
+    public void setJoueur(Joueur[] j)
+    {
         joueurs = j;
     }
 
-    public Joueur[] GetJoueurs(){
+    public Joueur[] GetJoueurs()
+    {
         return joueurs;
     }
-    
+
 }
