@@ -7,9 +7,7 @@ public class Joueur : MonoBehaviour
 {
     public Jeu jeu;
     public Plateau plateau;
-    public GameObject prefabObjetCarte;
-    public GameObject prefabObjetBrocante;
-    public GameObject prefabObjetJoueur;
+    public AfficherCarte afficherCarte;
     private Case casePlateau;
     private NewDice de;
     private bool tourFini;
@@ -21,10 +19,12 @@ public class Joueur : MonoBehaviour
     private const int NB_JOUR_MAX = 31;
     private string nomJoueur;
 
-    public IEnumerator effectuerUnTour(){
+    public IEnumerator effectuerUnTour()
+    {
         tourFini = false;
         de.lancerDe();
-        while(de.getValeurDe() == 0){
+        while (de.getValeurDe() == 0)
+        {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
         if(de.getValeurDe() == 6){
@@ -63,12 +63,17 @@ public class Joueur : MonoBehaviour
         }
         paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
         carteData = paquet.tirerRandomCarte();
-        chargerPrefab(carteData);
-        afficherTexteCarte(carteData);
+        afficherCarte.chargerPrefab(carteData);
+        afficherCarte.afficherTexteCarte(carteData);
+        while (estActionJouer())
+        {
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
+            Debug.Log(estActionJouer());
+        }
         hudJoueur.setScore(carteData);
-        supprimerPrefab();
         yield return new WaitForSeconds(TEMPS_ATTENTE);
         tourFini = true;
+        jeu.setAction(null);
     }
 
     public Case getCase()
@@ -81,7 +86,8 @@ public class Joueur : MonoBehaviour
         return tourFini;
     }
 
-    public int getMoisMax(){
+    public int getMoisMax()
+    {
         return moisActuel;
     }
 
@@ -99,52 +105,8 @@ public class Joueur : MonoBehaviour
         this.transform.position = casePlateau.transform.position;
     }
 
-    private void chargerPrefab(CarteData carteData){
-        if(carteData.getType() == "Brocante"){
-            GameObject nouvelObjet = Instantiate(prefabObjetBrocante);
-            prefabName = "PrefabCarteBrocante(Clone)";
-        } else {
-            GameObject nouvelObjet = Instantiate(prefabObjetCarte);
-            prefabName = "PrefabCarte(Clone)";
-        }
-    }
-
-    private void supprimerPrefab(){
-        GameObject objetASupprimer = GameObject.Find(prefabName);
-        if (objetASupprimer != null){
-            Destroy(objetASupprimer,2);
-        }else{
-            Debug.LogError("L'objet à supprimer n'a pas été trouvé dans la scène.");
-        }
-    }
-
-    public void afficherTexteCarte(CarteData carteData){
-        GameObject textObject = GameObject.Find("Carte_text");
-        Text composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = carteData.getDescription();
-
-        textObject = GameObject.Find("CarteTitle_text");
-        composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = carteData.getType();
-
-        textObject = GameObject.Find("CarteAction_text");
-        composantTexte = textObject.GetComponent<Text>();
-        composantTexte.text = "Gain : " + carteData.getValeur();
-
-        switch(carteData.getAction()){
-            case "Gain": 
-                composantTexte.text = "Gagner : " + carteData.getValeur();
-            break;
-            case "Perte": 
-                composantTexte.text = "Payer : " + carteData.getValeur();
-            break;
-            default : 
-            composantTexte.text = "";
-            break;
-        }
-    }
-
-    public void initialiserScoreJoueur(HudJoueur hudJoueur){
+    public void initialiserScoreJoueur(HudJoueur hudJoueur)
+    {
         this.hudJoueur = hudJoueur;
     }
 
@@ -158,5 +120,10 @@ public class Joueur : MonoBehaviour
 
     public string getNomJoueur(){
         return nomJoueur;
+    }
+    
+    public bool estActionJouer()
+    {
+        return jeu.getAction() == null;
     }
 }

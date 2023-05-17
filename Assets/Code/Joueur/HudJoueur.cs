@@ -22,7 +22,8 @@ public class HudJoueur : MonoBehaviour
         action = new Action();
     }
 
-    public void setScore(CarteData carteData) {
+    public void setScore(CarteData carteData)
+    {
         Cagnotte cagnotte = jeu.getCagnotte();
         action.actionCarte(scoreJoueur, cagnotte, carteData);
         miseAJourDesScores();
@@ -33,7 +34,8 @@ public class HudJoueur : MonoBehaviour
         textAcquisition.text = scoreJoueur.inventaireToString();
     }
 
-    public void setJeu(Jeu jeu){
+    public void setJeu(Jeu jeu)
+    {
         this.jeu = jeu;
     }
 

@@ -21,15 +21,17 @@ public class NewDice : MonoBehaviour
         Text composantTexte = textObject.GetComponent<Text>();
         composantTexte.text = valeurDe.ToString();
         yourButton.interactable = false; // Désactive le bouton
- 
+
     }
 
-    public void lancerDe(){
+    public void lancerDe()
+    {
         valeurDe = 0;
         yourButton.interactable = true;
     }
 
-    public int getValeurDe(){
+    public int getValeurDe()
+    {
         return valeurDe;
     }
 }
