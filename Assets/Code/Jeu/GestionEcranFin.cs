@@ -10,6 +10,7 @@ public class GestionEcranFin : MonoBehaviour
     Text[] topNom;
     Text[] topArgent;
     Joueur[] joueurs;
+    Text[] top;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class GestionEcranFin : MonoBehaviour
         RecuperationDesVariables();
         topNom = new Text[joueurs.Length];
         topArgent = new Text[joueurs.Length];
+        top = new Text[joueurs.Length];
         afficherFinPartie();
     }
 
@@ -26,19 +28,22 @@ public class GestionEcranFin : MonoBehaviour
     }
 
     public void afficherFinPartie(){
-        for(int i = 1; i <= topNom.Length; i++){
+        for(int i = 1; i <= joueurs.Length; i++){
             string str = "topNom"+i;
             Text j = GameObject.Find(str).GetComponent<Text>();
             topNom[i-1] = j;
             str = "topScore"+i;
             j = GameObject.Find(str).GetComponent<Text>();
             topArgent[i-1] = j;
+            j = GameObject.Find(""+i).GetComponent<Text>();
+            top[i-1] = j;
         }
         int x = joueurs.Length;
         for(int i = 0; i < x; i++){
             Joueur j = getMeilleurJoueur();
             topNom[i].text = j.getNomJoueur();
             topArgent[i].text = j.getArgent()+"€";
+            top[i].text = (i+1)+"";
             supprimerJoueur(j);
         }
     }
