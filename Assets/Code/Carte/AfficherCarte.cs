@@ -8,6 +8,7 @@ namespace Cartes
     {
         public GameObject prefabObjetCarte;
         public GameObject prefabObjetBrocante;
+        public GameObject prefabObjetPari;
         public GameObject prefabObjetJoueur;
         private string prefabName;
 
@@ -17,18 +18,20 @@ namespace Cartes
             switch (carteData.getType())
             {
                 case "Brocante":
-                    if (carteData.getAction() == "Perte") {
+                    if (carteData.getAction() == "Perte")
+                    {
                         nouvelObjet = Instantiate(prefabObjetBrocante);
                         prefabName = "PrefabCarteBrocante(Clone)";
-                    } else {
+                    }
+                    else
+                    {
                         nouvelObjet = Instantiate(prefabObjetJoueur);
                         prefabName = "PrefabCarteBrocante(Clone)";
-
                     }
                     break;
                 case "Pari":
-                    nouvelObjet = Instantiate(prefabObjetCarte);
-                    prefabName = "PrefabCarte(Clone)";
+                    nouvelObjet = Instantiate(prefabObjetPari);
+                    prefabName = "PrefabCartePariSportif(Clone)";
                     break;
                 default:
                     nouvelObjet = Instantiate(prefabObjetCarte);
@@ -79,10 +82,13 @@ namespace Cartes
             switch (carteData.getAction())
             {
                 case "Gain":
-                    if (carteData.getType() =="Brocante") {
-                        text = "Gagner : " + carteData.getVente(); 
-                    } else {
-                         text = "Gagner : " + carteData.getValeur();
+                    if (carteData.getType() == "Brocante")
+                    {
+                        text = "Gagner : " + carteData.getVente();
+                    }
+                    else
+                    {
+                        text = "Gagner : " + carteData.getValeur();
                     }
                     actionCarte(text);
                     break;

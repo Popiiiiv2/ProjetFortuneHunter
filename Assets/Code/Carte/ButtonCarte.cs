@@ -38,6 +38,10 @@ public class ButtonCarte : MonoBehaviour
                     btn = obj.GetComponent<Button>();
                     btn.onClick.AddListener(() => annulerEvenement(obj));
                     break;
+                case "Parier":
+                    btn = obj.GetComponent<Button>();
+                    btn.onClick.AddListener(() => pariSportif(obj));
+                    break;
             }
         }
     }
@@ -72,6 +76,37 @@ public class ButtonCarte : MonoBehaviour
     {
         Debug.Log("Annuler");
         jeu.setAction("Annuler");
+        destroyObjet();
+    }
+
+    private void pariSportif(GameObject obj)
+    {
+        Debug.Log("Lancer Pari");
+        foreach (GameObject ob in objects)
+        {
+            bool tog;
+            string name = ob.name;
+            switch (name)
+            {
+                case "TogglePlayer1":
+                    tog = obj.GetComponent<Toggle>().isOn;
+                    jeu.setValider(1, tog);
+                    break;
+                case "TogglePlayer2":
+                    tog = obj.GetComponent<Toggle>().isOn;
+                    jeu.setValider(2, tog);
+                    break;
+                case "TogglePlayer3":
+                    tog = obj.GetComponent<Toggle>().isOn;
+                    jeu.setValider(3, tog);
+                    break;
+                case "TogglePlayer4":
+                    tog = obj.GetComponent<Toggle>().isOn;
+                    jeu.setValider(4, tog);
+                    break;
+            }
+        }
+        jeu.setAction("Parier");
         destroyObjet();
     }
 }

@@ -17,6 +17,7 @@ public class Jeu : MonoBehaviour
     private const int NB_MAX_JOUEUR = 4;
     private const int NB_JOUR_MAX = 31;
     private string action;
+    private bool[] valider;
 
     // Start is called before the first frame update
     void Start()
@@ -185,6 +186,21 @@ public class Jeu : MonoBehaviour
     public string getAction()
     {
         return action;
+    }
+
+    public Joueur[] getJoueurs()
+    {
+        return joueurs;
+    }
+
+    public void setValider(int i, bool demande)
+    {
+        this.valider[i] = demande;
+    }
+
+    public bool[] getValider()
+    {
+        return valider;
     }
 }
 

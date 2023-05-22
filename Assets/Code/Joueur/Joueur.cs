@@ -27,7 +27,8 @@ public class Joueur : MonoBehaviour
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
-        if(de.getValeurDe() == 6){
+        if (de.getValeurDe() == 6)
+        {
             int montantCagnotte = jeu.getCagnotte().getMontant();
             hudJoueur.getArgentCagnotte(montantCagnotte);
             jeu.getCagnotte().reinitialiserCagnotte();
@@ -58,16 +59,29 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
         casePlateau = plateau.getCase(numCaseFinale);
-        if(numCaseFinale == NB_JOUR_MAX){
+        if (numCaseFinale == NB_JOUR_MAX)
+        {
             hudJoueur.obtenirPaye();
         }
-        if (casePlateau.getTypeCase() == TypeCase.BROCANTE && !hudJoueur.getScore().estVide()) {
+        Debug.Log(casePlateau.getTypeCase());
+        if (casePlateau.getTypeCase() == TypeCase.BROCANTE && !hudJoueur.getScore().estVide())
+        {
             carteData = hudJoueur.getScore().getInventaire();
             carteData.setAction("Gain");
             afficherCarte.chargerPrefab(carteData);
             afficherCarte.afficherTexteCarte(carteData);
 
-        } else {
+        }
+        else if (casePlateau.getTypeCase() == TypeCase.PARI_SPORTIF)
+        {
+            paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
+            carteData = paquet.tirerRandomCarte();
+            afficherCarte.chargerPrefab(carteData);
+            afficherCarte.afficherTexteCarte(carteData);
+            pariSportif(carteData);
+        }
+        else
+        {
             paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
             carteData = paquet.tirerRandomCarte();
             afficherCarte.chargerPrefab(carteData);
@@ -78,7 +92,8 @@ public class Joueur : MonoBehaviour
             yield return new WaitForSeconds(TEMPS_ATTENTE);
             Debug.Log(estActionJouer());
         }
-        if (jeu.getAction() != "Annuler") {
+        if (jeu.getAction() != "Annuler")
+        {
             hudJoueur.setScore(carteData);
         }
         yield return new WaitForSeconds(TEMPS_ATTENTE);
@@ -94,6 +109,11 @@ public class Joueur : MonoBehaviour
     public bool isTourFini()
     {
         return tourFini;
+    }
+
+    public HudJoueur getHudJoueur()
+    {
+        return hudJoueur;
     }
 
     public int getMoisMax()
@@ -120,20 +140,48 @@ public class Joueur : MonoBehaviour
         this.hudJoueur = hudJoueur;
     }
 
-    public int getArgent(){
+    public int getArgent()
+    {
         return hudJoueur.getScore().getMontant();
     }
 
-    public void setNomJoueur(string s){
+    public void setNomJoueur(string s)
+    {
         nomJoueur = s;
     }
 
-    public string getNomJoueur(){
+    public string getNomJoueur()
+    {
         return nomJoueur;
     }
-    
+
     public bool estActionJouer()
     {
         return jeu.getAction() == null;
+    }
+
+    public IEnumerator pariSportif(CarteData carteData)
+    {
+        Cagnotte pari = new Cagnotte();
+        pari.setMontant(1000);
+        afficherCarte.chargerPrefab(carteData);
+        while (estActionJouer())
+        {
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
+            Debug.Log(estActionJouer());
+        }
+        bool[] valider = jeu.getValider();
+        hudJoueur.getAction().participerPari(pari, valider, jeu.getJoueurs());
+        NewDice dePari = new NewDice();
+        while (dePari.getValeurDe() > 4 && !valider[dePari.getValeurDe()])
+        {
+            while (dePari.getValeurDe() == 0)
+            {
+                yield return new WaitForSeconds(TEMPS_ATTENTE);
+            }
+            dePari.lancerDe();
+        }
+        hudJoueur.getAction().gagnerCagnotte(jeu.getJoueurs()[dePari.getValeurDe()].hudJoueur.getScore(), pari);
+
     }
 }

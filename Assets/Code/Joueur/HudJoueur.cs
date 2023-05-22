@@ -24,6 +24,11 @@ public class HudJoueur : MonoBehaviour
         action = new Action();
     }
 
+    public Action getAction()
+    {
+        return action;
+    }
+
     public void setScore(CarteData carteData)
     {
         Cagnotte cagnotte = jeu.getCagnotte();
