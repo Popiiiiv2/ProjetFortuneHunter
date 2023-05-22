@@ -6,7 +6,7 @@ using Cartes;
 public class Joueur : MonoBehaviour
 {
     public Jeu jeu;
-    public Plateau plateau;
+    private Plateau plateau;
     public AfficherCarte afficherCarte;
     private Case casePlateau;
     private NewDice de;
@@ -76,7 +76,6 @@ public class Joueur : MonoBehaviour
         while (estActionJouer())
         {
             yield return new WaitForSeconds(TEMPS_ATTENTE);
-            Debug.Log(estActionJouer());
         }
         if (jeu.getAction() != "Annuler") {
             hudJoueur.setScore(carteData);
@@ -101,9 +100,8 @@ public class Joueur : MonoBehaviour
         return moisActuel;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public void InitialisationJoueur(Plateau p){
+        plateau = p;
         caseDepart();
         de = GameObject.Find("Button").GetComponent<NewDice>();
         this.moisActuel = 1;
