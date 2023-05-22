@@ -6,20 +6,25 @@ using UnityEngine.TestTools;
 
 public class TestJeu
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void TestJeuSimplePasses()
+
+    private Jeu jeu;
+
+    [SetUp]
+    public void Setup()
     {
-        // Use the Assert class to test conditions
+        GameObject go = new GameObject();
+        jeu = go.AddComponent<Jeu>();
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator TestJeuWithEnumeratorPasses()
+    [TearDown]
+    public void TearDown()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        jeu = null;
+    }
+
+    [Test]
+    public void TestJeu1()
+    {
+
     }
 }

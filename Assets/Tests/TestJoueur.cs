@@ -8,6 +8,7 @@ public class TestJoueur
 {
 
     private Joueur joueur;
+    private HudJoueur hudJoueur;
 
     [SetUp]
     public void Setup()
@@ -18,13 +19,17 @@ public class TestJoueur
         Plateau plateau = go.AddComponent<Plateau>();
         plateau.creerCases();
         plateau.setNumCase();
-        joueur.InitialisationJoueur(plateau);
+        hudJoueur = go.AddComponent<HudJoueur>();
+        hudJoueur.initialisationScore();
+        joueur.initialisationJoueur(plateau);
+        joueur.initialiserScoreJoueur(hudJoueur);
     }
 
     [TearDown]
     public void TearDown()
     {
         joueur = null;
+        hudJoueur = null;
     }
 
     // A Test behaves as an ordinary method
@@ -33,6 +38,39 @@ public class TestJoueur
     {
         int numCase = joueur.getCase().getNumCase();
         Assert.AreEqual(numCase, 0);
+    }
+
+    [Test]
+    public void TestInitialisationJoueurMoisDeDepart()
+    {
+        int moisActuel = joueur.getMoisMax();
+        Assert.AreEqual(moisActuel, 1);
+    }
+
+    [Test]
+    public void TestInitialisationJoueurArgent()
+    {
+        Assert.AreEqual(joueur.getArgent(), 650);
+    }
+
+    [Test]
+    public void TestInitialisationJoueurPaye()
+    {
+        joueur.obtenirPaye();
+        Assert.AreEqual(joueur.getArgent(), 2150);
+    }
+
+    [UnityTest]
+    public IEnumerator TestAvancerCaseFinale()
+    {
+        int valeurDe = 2;
+        int numCaseAttendue = 2;
+        joueur.avancer(valeurDe);
+
+        yield return null; 
+
+        // Assert
+        Assert.AreEqual(numCaseAttendue, joueur.getCase().getNumCase());
     }
 }
 

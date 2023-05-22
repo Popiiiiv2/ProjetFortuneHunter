@@ -18,6 +18,7 @@ public class Joueur : MonoBehaviour
     private const float TEMPS_ATTENTE = 0.2f;
     private const int NB_JOUR_MAX = 31;
     private string nomJoueur;
+    private bool deplacementfini;
 
     public IEnumerator effectuerUnTour()
     {
@@ -44,10 +45,17 @@ public class Joueur : MonoBehaviour
             moisActuel++;
         }
         StartCoroutine(deplacerJoueur(numCaseFinale));
+        casePlateau = plateau.getCase(numCaseFinale);
+        if(numCaseFinale == NB_JOUR_MAX){
+            obtenirPaye();
+        }
+        StartCoroutine(tirerUneCarte());
     }
+
     //tour du joueur
     IEnumerator deplacerJoueur(int numCaseFinale)
     {
+        deplacementfini = false;
         CarteData carteData = new CarteData();
         int numCasePlateauSuivante = casePlateau.getNumCase() + 1;
         yield return new WaitForSeconds(TEMPS_ATTENTE);
@@ -56,11 +64,15 @@ public class Joueur : MonoBehaviour
             Case caseSuivante = plateau.getCase(i);
             this.transform.position = caseSuivante.transform.position;
             yield return new WaitForSeconds(TEMPS_ATTENTE);
+        }  
+        deplacementfini = true;
+    }
+
+    IEnumerator tirerUneCarte(){
+        while(!deplacementfini){
+            yield return new WaitForSeconds(TEMPS_ATTENTE);
         }
-        casePlateau = plateau.getCase(numCaseFinale);
-        if(numCaseFinale == NB_JOUR_MAX){
-            hudJoueur.obtenirPaye();
-        }
+        CarteData carteData = new CarteData();
         if (casePlateau.getTypeCase() == TypeCase.BROCANTE && !hudJoueur.getScore().estVide()) {
             carteData = hudJoueur.getScore().getInventaire();
             carteData.setAction("Gain");
@@ -81,8 +93,8 @@ public class Joueur : MonoBehaviour
             hudJoueur.setScore(carteData);
         }
         yield return new WaitForSeconds(TEMPS_ATTENTE);
-        tourFini = true;
         jeu.setAction(null);
+        tourFini = true;
     }
 
     public Case getCase()
@@ -100,7 +112,7 @@ public class Joueur : MonoBehaviour
         return moisActuel;
     }
 
-    public void InitialisationJoueur(Plateau p){
+    public void initialisationJoueur(Plateau p){
         plateau = p;
         caseDepart();
         de = GameObject.Find("Button").GetComponent<NewDice>();
@@ -133,5 +145,9 @@ public class Joueur : MonoBehaviour
     public bool estActionJouer()
     {
         return jeu.getAction() == null;
+    }
+
+    public void obtenirPaye(){
+        hudJoueur.obtenirPaye();
     }
 }

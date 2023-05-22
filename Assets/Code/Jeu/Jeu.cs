@@ -121,7 +121,7 @@ public class Jeu : MonoBehaviour
             if (i < joueurs.Length)
             {
                 joueurs[i] = j.GetComponent<Joueur>();
-                joueurs[i].InitialisationJoueur(plateau);
+                joueurs[i].initialisationJoueur(plateau);
             }
             else
             {
