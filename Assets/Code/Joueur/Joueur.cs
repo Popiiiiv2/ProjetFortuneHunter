@@ -66,14 +66,15 @@ public class Joueur : MonoBehaviour
         Debug.Log(casePlateau.getTypeCase());
         if (casePlateau.getTypeCase() == TypeCase.BROCANTE && !hudJoueur.getScore().estVide())
         {
+            Debug.Log("Type de case : Broncante");
             carteData = hudJoueur.getScore().getInventaire();
             carteData.setAction("Gain");
             afficherCarte.chargerPrefab(carteData);
             afficherCarte.afficherTexteCarte(carteData);
-
         }
         else if (casePlateau.getTypeCase() == TypeCase.PARI_SPORTIF)
         {
+            Debug.Log("Type de case : Pari_sportif");
             paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
             carteData = paquet.tirerRandomCarte();
             afficherCarte.chargerPrefab(carteData);
@@ -82,6 +83,7 @@ public class Joueur : MonoBehaviour
         }
         else
         {
+            Debug.Log("Type de case : default");
             paquet = jeu.paquets.getPaquet(casePlateau.getTypeCase());
             carteData = paquet.tirerRandomCarte();
             afficherCarte.chargerPrefab(carteData);
@@ -171,6 +173,12 @@ public class Joueur : MonoBehaviour
             Debug.Log(estActionJouer());
         }
         bool[] valider = jeu.getValider();
+        Debug.Log("-----------");
+        Debug.Log(valider[0]);
+        Debug.Log(valider[1]);
+        Debug.Log(valider[2]);
+        Debug.Log(valider[3]);
+        Debug.Log("-----------");
         hudJoueur.getAction().participerPari(pari, valider, jeu.getJoueurs());
         NewDice dePari = new NewDice();
         while (dePari.getValeurDe() > 4 && !valider[dePari.getValeurDe()])

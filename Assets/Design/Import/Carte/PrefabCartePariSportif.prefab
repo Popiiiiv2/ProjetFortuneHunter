@@ -1221,7 +1221,7 @@ GameObject:
   - component: {fileID: 4968089649801101903}
   - component: {fileID: 256494647235635284}
   m_Layer: 5
-  m_Name: Valide
+  m_Name: Parier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

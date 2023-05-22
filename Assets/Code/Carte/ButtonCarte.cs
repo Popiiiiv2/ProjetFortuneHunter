@@ -81,7 +81,6 @@ public class ButtonCarte : MonoBehaviour
 
     private void pariSportif(GameObject obj)
     {
-        Debug.Log("Lancer Pari");
         foreach (GameObject ob in objects)
         {
             bool tog;
