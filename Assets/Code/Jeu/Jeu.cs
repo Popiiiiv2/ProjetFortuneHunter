@@ -29,9 +29,10 @@ public class Jeu : MonoBehaviour
 
 
         //Initialisation du jeu
+        CreationPlateau();
         InitialisationDesJoueurs();
         InitialisationDesHud();
-        CreationPlateau();
+        
 
         //initialisation du paquet
         paquets = new PaquetsCartes();
@@ -98,7 +99,7 @@ public class Jeu : MonoBehaviour
     public void CreationPlateau()
     {
         plateau = GameObject.Find("Plateau").GetComponent<Plateau>();
-        plateau.setNumCase();
+        plateau.CreationPlateau();
     }
 
     //récupération du nombre de joueurs et de mois
@@ -120,7 +121,7 @@ public class Jeu : MonoBehaviour
             if (i < joueurs.Length)
             {
                 joueurs[i] = j.GetComponent<Joueur>();
-                joueurs[i].caseDepart();
+                joueurs[i].initialisationJoueur(plateau);
             }
             else
             {
