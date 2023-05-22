@@ -81,7 +81,8 @@ public class Jeu : MonoBehaviour
         return cagnotte;
     }
 
-    private void updateCagnotte(){
+    private void updateCagnotte()
+    {
         Text textCagnotte = GameObject.Find("Argent").GetComponent<Text>();
         textCagnotte.text = cagnotte.ToString();
     }
@@ -130,16 +131,20 @@ public class Jeu : MonoBehaviour
     }
 
     // initialisation des Huds Joueurs
-    public void InitialisationDesHud(){
-        for(int i = 0; i < NB_MAX_JOUEUR; i++){
-            string str = "HUDJ"+(i+1);
+    public void InitialisationDesHud()
+    {
+        for (int i = 0; i < NB_MAX_JOUEUR; i++)
+        {
+            string str = "HUDJ" + (i + 1);
             GameObject gm = GameObject.Find(str);
             HudJoueur hud = gm.GetComponent<HudJoueur>();
-            if(i < joueurs.Length) {
-                str = "ScoreJoueur"+(i+1);
-                string strAcquisition = "TextAcquisition"+(i+1);
+            if (i < joueurs.Length)
+            {
+                str = "ScoreJoueur" + (i + 1);
+                string strAcquisition = "TextAcquisition" + (i + 1);
                 hud.initialiserScoreJoueur(str, strAcquisition);
                 hud.setJeu(this);
+                hud.afficherNomJoueur(joueurs[i], i + 1);
                 joueurs[i].initialiserScoreJoueur(hud);
             }
             else
@@ -167,11 +172,12 @@ public class Jeu : MonoBehaviour
         return (tourDuJoueur + 1) % joueurs.Length;
     }
 
-    public void afficherFinPartie(){
+    public void afficherFinPartie()
+    {
         GlobalVariable globalVars = FindObjectOfType<GlobalVariable>();
         globalVars.setJoueur(joueurs);
         SceneManager.LoadScene("FinDeGame");
-    }    
+    }
     public void setAction(string action)
     {
         this.action = action;
