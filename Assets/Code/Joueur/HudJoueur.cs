@@ -15,12 +15,16 @@ public class HudJoueur : MonoBehaviour
 
     public void initialiserScoreJoueur(string score, string textAcqui)
     {
-        this.scoreJoueur = new ScoreJoueur();
+        initialisationScore();
         text = GameObject.Find(score).GetComponent<Text>();
         text.text = scoreJoueur.ToString();
         textAcquisition = GameObject.Find(textAcqui).GetComponent<Text>();
         textAcquisition.text = scoreJoueur.inventaireToString();
         action = new Action();
+    }
+
+    public void initialisationScore(){
+        this.scoreJoueur = new ScoreJoueur();
     }
 
     public void setScore(CarteData carteData)
@@ -46,8 +50,10 @@ public class HudJoueur : MonoBehaviour
 
     public void miseAJourDesScores()
     {
-        text.text = scoreJoueur.ToString();
-        textAcquisition.text = scoreJoueur.inventaireToString();
+        if(text!= null && textAcquisition != null){
+            text.text = scoreJoueur.ToString();
+            textAcquisition.text = scoreJoueur.inventaireToString();
+        }
     }
 
     public void setJeu(Jeu jeu)
