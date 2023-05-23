@@ -7,7 +7,6 @@ namespace Cartes
         public CarteControleur mail;
         public CarteControleur dimanche;
         public CarteControleur paye;
-        public CarteControleur pari;
 
         public PaquetsCartes()
         {
@@ -16,7 +15,6 @@ namespace Cartes
             mail = new CarteControleur(TypeCase.MAIL);
             dimanche = new CarteControleur(TypeCase.DIMANCHE);
             paye = new CarteControleur(TypeCase.PAYE);
-            pari = new CarteControleur(TypeCase.PARI_SPORTIF);
         }
 
         public CarteControleur getPaquet(TypeCase type)
@@ -33,8 +31,6 @@ namespace Cartes
                     return getDimanche();
                 case TypeCase.PAYE:
                     return getPaye();
-                case TypeCase.PARI_SPORTIF:
-                    return getPari();
                 default : return null;
             }
         }
@@ -62,11 +58,6 @@ namespace Cartes
         public CarteControleur getPaye()
         {
             return paye;
-        }
-
-        public CarteControleur getPari()
-        {
-            return pari;
         }
     }
 }

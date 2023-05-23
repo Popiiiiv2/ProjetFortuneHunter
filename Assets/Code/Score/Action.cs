@@ -46,25 +46,7 @@ public class Action
         gagnant.setMontant(gagnant.getMontant() + cagnotte.getMontant());
         cagnotte.setMontant(0);
     }
-/*
-    public void participerPari() {
 
-    }
-
-    public void gagnerPari() {
-
-    }
-
-    public bool choixAchatVente() {
-        return ;
-    }
-
-
-
-    public bool demandeAchat() {
-        return Input.GetKeyDown(KeyCode.Space);
-    }
-*/
     public void achat(ScoreJoueur acheteur, CarteData carte) {
         if (acheteur.estVide()) {
             if (acheteur.getMontant() >= carte.getValeur()) {

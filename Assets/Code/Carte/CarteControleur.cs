@@ -43,10 +43,6 @@ namespace Cartes
                     jsonContenu = File.ReadAllText(cheminDossier + "paye.json");
                     paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
                     break;
-                case TypeCase.PARI_SPORTIF:
-                    jsonContenu = File.ReadAllText(cheminDossier + "pariSportif.json");
-                    paquet = JsonUtility.FromJson<CarteDataList>(jsonContenu);
-                    break;
                 default: break;
             }
         }
