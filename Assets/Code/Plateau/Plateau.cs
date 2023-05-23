@@ -5,10 +5,10 @@ public class Plateau : MonoBehaviour
     private Case[] tabCase;
     private int TAILLE_MAX = 32;
     private static int NOMBRE_MAX_EVENEMENT = 11;
-    private static int NOMBRE_MAX_PARI_SPORTIF = 1;
     private static int NOMBRE_MAX_BROCANTE = 6;
-    private static int NOMBRE_MAX_MAIL = 8;
-    private static int[] tab = {NOMBRE_MAX_BROCANTE, NOMBRE_MAX_PARI_SPORTIF, NOMBRE_MAX_EVENEMENT, NOMBRE_MAX_MAIL };
+    private static int NOMBRE_MAX_MAIL = 9;
+    private const int NB_JOUR_SEMAINE = 7;
+    private static int[] tab = {NOMBRE_MAX_BROCANTE, NOMBRE_MAX_EVENEMENT, NOMBRE_MAX_MAIL };
 
     public Case getCase(int numCase)
     {
@@ -59,7 +59,7 @@ public class Plateau : MonoBehaviour
     public void setUpCases(){
         TypeCase typeDernièreCase = TypeCase.DIMANCHE;
         for (int i = 1; i < TAILLE_MAX-1; i++) {
-        if (i % 7 == 0) {
+        if (i % NB_JOUR_SEMAINE == 0) {
             setTypeAndColor(tabCase[i], TypeCase.DIMANCHE);
             typeDernièreCase = TypeCase.DIMANCHE;
         } else {

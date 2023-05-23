@@ -59,10 +59,4 @@ public class TestCase
         Assert.AreEqual(cases.getTypeCase(), TypeCase.PAYE);
     }
 
-    [Test]
-    public void testTypeCasePari(){
-        cases.setTypeCase(TypeCase.PARI_SPORTIF);
-        Assert.AreEqual(cases.getTypeCase(), TypeCase.PARI_SPORTIF);
-    }
-
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 public enum TypeCase
 {
     BROCANTE,
-    PARI_SPORTIF,
     EVENEMENT,
     MAIL,
     PAYE,
@@ -19,8 +18,6 @@ public static class TypeCaseExtensions
         {
             case TypeCase.BROCANTE:
                 return Color.magenta;
-            case TypeCase.PARI_SPORTIF:
-                return Color.blue;
             case TypeCase.EVENEMENT:
                 return Color.green;
             case TypeCase.DIMANCHE:
@@ -45,12 +42,9 @@ public static class TypeCaseExtensions
                 return TypeCase.BROCANTE;
             case 2:
                 Plateau.enleverUn(1);
-                return TypeCase.PARI_SPORTIF;
+                return TypeCase.EVENEMENT;
             case 3:
                 Plateau.enleverUn(2);
-                return TypeCase.EVENEMENT;
-            case 4:
-                Plateau.enleverUn(3);
                 return TypeCase.MAIL;
             default:
                 return TypeCase.EVENEMENT;
@@ -71,22 +65,18 @@ public static class TypeCaseExtensions
         {
             list.Add(1);
         }
-        if (tab[1] != 0 && typeDernièreCase != TypeCase.PARI_SPORTIF)
+        if (tab[1] != 0 && typeDernièreCase != TypeCase.EVENEMENT)
         {
             list.Add(2);
         }
-        if (tab[2] != 0 && typeDernièreCase != TypeCase.EVENEMENT)
+        if (tab[2] != 0 && typeDernièreCase != TypeCase.MAIL)
         {
             list.Add(3);
-        }
-        if (tab[3] != 0 && typeDernièreCase != TypeCase.MAIL)
-        {
-            list.Add(4);
         }
 
         if (list.Count == 0)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (tab[i] != 0)
                 {
