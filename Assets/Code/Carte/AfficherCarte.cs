@@ -26,10 +26,6 @@ namespace Cartes
 
                     }
                     break;
-                case "Pari":
-                    nouvelObjet = Instantiate(prefabObjetCarte);
-                    prefabName = "PrefabCarte(Clone)";
-                    break;
                 default:
                     nouvelObjet = Instantiate(prefabObjetCarte);
                     prefabName = "PrefabCarte(Clone)";
