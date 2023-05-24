@@ -68,7 +68,7 @@
       "description": "Vous investissez sur l'orge.\nCependant le court de l'orge s'effondre.\nORGE !\nVous perdez 200€",
       "titre": "Orge",
       "type": "Event",
-      "valeur": "800",
+      "valeur": "200",
       "fichier": "",
       "action": "Perte"
     },
