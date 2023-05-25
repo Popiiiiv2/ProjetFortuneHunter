@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2500,42 +2500,42 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "4 TYPES DE CARTES :\n\n- Bien : Vous pouvez acheter ou vendre un bien
+  m_Text: "3 TYPES DE CARTES :\n\n- Bien : Vous pouvez acheter ou vendre un bien
     pour le meilleur prix.\r\n- Mail : Vous recevez un mail. Qui sait ce que vous
-    trouverez dedans ?\r\n- \xC9v\xE9nement : Un \xE9v\xE8nement al\xE9atoire sauvage
-    apparait. Tout peut arriver. Le meilleur comme le pire.\r\n\r\nLES 6 CASES :\n\r\n-
+    trouverez dedans ?\r\n- \xC9v\xE8nement : Un \xE9v\xE8nement al\xE9atoire sauvage
+    apparait. Tout peut arriver. Le meilleur comme le pire.\r\n\r\nLES 5 CASES :\n\r\n-
     Case dimanche : Qu\u2019il fasse beau ou mauvais, vous n\u2019avez rien pr\xE9vu
     aujourd\u2019hui.\r\n- Case \xE9v\xE8nement : Piochez une carte \xE9v\xE8nement.
     Que vous arrivera-t-il, aujourd\u2019hui..?\r\n- Case mail : Piochez une carte
-    mail. De quoi s\u2019agit-il ..?\r\n- Case pari sportif : Payez pour participer,
-    et tentez de gagner gros !\r\n- Case paye : Recevez votre argent de poche.\r\n-
-    Case brocante : Achetez ou vendez le bien propos\xE9. Saurez-vous en tirer le
-    meilleur prix ?\r\n\r\nLA CAGNOTTE :\n\nL\u2019argent s\u2019amasse petit \xE0
-    petit\u2026 Un jet de d\xE9 chanceux et vous raflerez tout ! Obtenez un 6 pour
-    r\xE9cup\xE9rer la totalit\xE9 de la cagnotte.\r\n\r\nLA BANQUE :\n\nLa banque
-    se soucie uniquement de vous. Elle g\xE8re l\u2019argent du jeu.\n\r\nLE DE :
-    \n\nIl s\u2019agit d\u2019un simple d\xE9 \xE0 6 faces. \r\n\r\nPREPARATION DE
-    LA PARTIE :\n\r\nLes joueurs s\xE9lectionnent le nombre de particpants et de
-    mois, puis entre leurs noms.\n\r\nDEROULE DE LA PARTIE\n\r\nCommencez par lancer
-    votre d\xE9 en appuyant sur le bouton \u201CD\xE9\u201D, la valeur sera affich\xE9e.\r\nVotre
-    pion se d\xE9placera automatiquement.\r\n\r\nVous pouvez tomber sur une des 6
-    cases pr\xE9sentes sur le plateau (R\xE9f\xE9rez vous \xE0 l\u2019onglet \u201CCase\u201D).\r\n\r\nUne
-    fois votre action termin\xE9e, votre tour se termine pour laisser la place au
-    joueur suivant.\r\n\r\nSi votre valeur de d\xE9 vous fait d\xE9passer le nombre
-    maximum de jours dans le mois vous recevez votre paye et vous serez d\xE9plac\xE9
-    sur la case \"D\xE9part\".\r\n\r\nSUITE :\n\r\nUne partie se d\xE9roule sur un
-    plateau contenant 31 cases dont 4 cases \"Dimanche\", une case \"Pari sportif\",
-    4 cases \"Brocante\", 13 cases \"Ev\xE9nement\", 8 cases \"Courrier\" et une
-    case \"Paye\" toujours au dernier jour du mois.\n\r\nTous les joueurs commencent
-    avec un montant de 650\u20AC.\r\n\r\nLa partie d\xE9bute sur une case \"D\xE9part\"
-    qui n\u2019est pas un jour du mois. \r\n\r\nTous les joueurs jouent leurs tours
-    jusqu\u2019\xE0 ce qu\u2019un joueur atteigne le dernier jour du dernier mois,
-    ce qui a pour cons\xE9quence d\u2019arr\xEAter la partie.\r\n\r\nCONSULTER L'INVENTAIRE
-    :\r\n\r\nLes joueurs peuvent consulter leurs inventaires tout au long de la partie
-    en cliquant sur leur score en haut de l'\xE9cran.\r\n\r\nFIN DE LA PARTIE :\r\n\r\nLe
-    joueur avec le score le plus \xE9lev\xE9 (repr\xE9sent\xE9 par la quantit\xE9
-    d\u2019argent amass\xE9e pendant la partie) gagne la partie. Mais attention,
-    les acquisitions non vendues ne seront pas comptabilis\xE9es dans le score."
+    mail. De quoi s\u2019agit-il ..?\r\n- Case brocante : Achetez ou vendez le bien
+    propos\xE9. Saurez-vous en tirer le meilleur prix ?\r\n\r- Case paye : Recevez
+    votre argent de poche.\r\n\nLA CAGNOTTE :\n\nL\u2019argent s\u2019amasse petit
+    \xE0 petit\u2026 Un jet de d\xE9 chanceux et vous raflerez tout ! Obtenez un
+    6 pour r\xE9cup\xE9rer la totalit\xE9 de la cagnotte.\r\n\r\nLA BANQUE :\n\nLa
+    banque se soucie uniquement de vous. Elle g\xE8re l\u2019argent du jeu.\n\r\nLE
+    DE : \n\nIl s\u2019agit d\u2019un simple d\xE9 \xE0 6 faces. \r\n\r\nPREPARATION
+    DE LA PARTIE :\n\r\nLes joueurs s\xE9lectionnent le nombre de particpants et
+    de mois, puis entre leurs noms.\n\r\nDEROULE DE LA PARTIE :\n\r\nCommencez par
+    lancer votre d\xE9 en appuyant sur le bouton \u201CD\xE9\u201D, la valeur sera
+    affich\xE9e.\r\nVotre pion se d\xE9placera automatiquement.\r\n\r\nVous pouvez
+    tomber sur une des 5 cases pr\xE9sentes sur le plateau (R\xE9f\xE9rez vous \xE0
+    l\u2019onglet \u201CCase\u201D).\r\n\r\nUne fois votre action termin\xE9e, votre
+    tour se termine pour laisser la place au joueur suivant.\r\n\r\nSi votre valeur
+    de d\xE9 vous fait d\xE9passer le nombre maximum de jours dans le mois vous recevrez
+    votre paye et vous serez d\xE9plac\xE9 sur la case \"D\xE9part\".\r\n\r\nSUITE
+    :\n\r\nUne partie se d\xE9roule sur un plateau contenant 31 cases dont 4 cases
+    \"Dimanche\", une case \"Pari sportif\", 4 cases \"Brocante\", 13 cases \"Ev\xE9nement\",
+    9 cases \"Mail\" et une case \"Paye\" toujours au dernier jour du mois.\n\r\nTous
+    les joueurs commencent avec un montant de 650\u20AC.\r\n\r\nLa partie d\xE9bute
+    sur une case \"D\xE9part\" qui n\u2019est pas un jour du mois. \r\n\r\nTous les
+    joueurs jouent leurs tours jusqu\u2019\xE0 ce qu\u2019un joueur atteigne le dernier
+    jour du dernier mois, ce qui a pour cons\xE9quence d\u2019arr\xEAter la partie.\r\n\r\nCONSULTER
+    L'INVENTAIRE :\r\n\r\nLes joueurs peuvent consulter leurs inventaires tout au
+    long de la partie en cliquant sur leur score en haut de l'\xE9cran.\r\n\r\nFIN
+    DE LA PARTIE :\r\n\r\nLe joueur avec le score le plus \xE9lev\xE9 (repr\xE9sent\xE9
+    par la quantit\xE9 d\u2019argent amass\xE9e pendant la partie) gagne la partie.
+    Mais attention, les acquisitions non vendues ne seront pas comptabilis\xE9es
+    dans le score."
 --- !u!222 &1634020080
 CanvasRenderer:
   m_ObjectHideFlags: 0
